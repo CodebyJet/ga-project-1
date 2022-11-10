@@ -2,13 +2,28 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>The Game</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/main.css">
+      <script src="./scripts/app.js" charset="utf-8"></script>
   <title>Document</title>
 </head>
 <body>
-  
+  <h1>snazzy title</h1>
+  <div class="gameDisplay">
+  <header class="controls-wrapper">
+    <button class="startBtn">Start</button>
+    <button class="graphicsBtn">Graphics?</button>
+    <button class="soundBtn">Sound</button>
+    <audio class="backgroundSound"></audio>
+    <audio class="pewPew"></audio>
+    <p>Current Score <span id="score-display">0</span></p>
+    <div class="linkGit"><a href="https://github.com/CodebyJet">link git</a></div>
+  </header>
+  <div class="grid-wrapper">
+    <div class="grid"></div>
+  </div>
+  </div>
 </body>
-<script src="./scripts/app.js"></script>
 </html>
