@@ -56,3 +56,17 @@ body {
 .missile{
   background-color: green;
 }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(247, 73, 200);
+}
+::-webkit-scrollbar-thumb {
+  background: #1FFFFB;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(109, 210, 8);
+}

@@ -23,3 +23,7 @@ destroying an alien
 aliens shooting
 player defeat on being shot of the aliens landing
 restarting the game
+
+
+First Day
+JUst planning on excalidraw
