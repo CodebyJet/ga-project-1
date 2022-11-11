@@ -17,6 +17,9 @@ let playerPosition = 389;
 let alienPosition = 9;
 let interval;
 let travelDistance = 19;
+let score = 0
+
+
 
 function init() {
   createGrid();
@@ -33,20 +36,21 @@ function createGrid() {
   }
   placePlayer(playerPosition);
   placeAlien(alienPosition);
-  // moveAlien()
+  moveAlien()
 }
 
-function placePlayer(cellNumber) {
-  cells[cellNumber].classList.add("player");
+function placePlayer(playerPosition) {
+  cells[playerPosition].classList.add("player");
 }
-function placeAlien(cellNumber) {
-  cells[cellNumber].classList.add("alien");
+
+//todo make alien an array and this a forEach
+function placeAlien(alienPosition) {
+  cells[alienPosition].classList.add("alien");
 }
 //player controls
 function movePlayer(event) {
   const x = playerPosition % width;
   const y = Math.floor(playerPosition / width);
-  console.log(x, y);
   if (event.key === "ArrowRight" && x < width - 1) {
     moveRight();
   } else if (event.key === "ArrowLeft" && x > 0) {
@@ -84,70 +88,70 @@ function addMissile(cellNumber) {
   cells[missilePosition].classList.add("missile");
 }
 function startMissile() {
-  interval = setInterval(missileTravel, 250);
+  interval = setInterval(missileTravel, 75); //was originally 250
 }
 
 function missileTravel() {
   if (travelDistance > 1) {
+    // checkIfHit()
     removeMissile();
     missilePosition = missilePosition - 20;
     addMissile();
     travelDistance--;
-    // console.log(travelDistance);
   } else {
     endMissile();
-    travelDistance = 19
   }
 }
-
 function endMissile() {
   clearInterval(interval);
   removeMissile();
+  travelDistance = 19
+}
+
+function checkIfHit(){
+  if (missilePosition.classList.contains("alien")){
+    //  destroyAlien()
+    endMissile()
+    score ++
+  }
+}
+
+function scoreUp(){
+  score += 100
+  scoreDisplay.innerHTML = score
 }
 
 //todo alien movement --- will add in multiple aliens when i get 1 going
+//todo potentially making all of this an array, witch switch methods?
 // let leftToRight = true;
 
-// function moveAlien() {
-//   const x = alienPosition % width;
-//   const y = Math.floor(alienPosition / width);
-//   setInterval(() => {
-//     if (x === 1 || x === 9) {
-//       checkEdge();
-//     }
-//     if (LeftToRight == true) {
-//       moveAlienRight();
-//     } else {
-//       moveAlienLeft();
-//     }
-//   }, 1000);
-// }
+function moveAlien() {
+  setInterval(() => {
+    moveAlienRight();
+  }, 1000);
+}
 
-// function moveAlienRight() {
-//   const x = alienPosition % width;
-//   if (x < 9) {
-//     alienPosition++;
-//     placeAlien(alienPosition);
-//   } else {
-//     moveAlienDown();
-//   }
-// }
+function moveAlienRight() {
+  removeAlien(alienPosition);
+  // console.log(alienPosition);
+  alienPosition++;
+  placeAlien(alienPosition);
+}
 
-// function moveAlienLeft() {
-//   alienPosition--;
-//   placeAlien(alienPosition);
-// }
-// function checkEdge() {
-//   leftToRight ^= true;
-//   moveAlienDown();
-// }
-// function moveAlienDown() {
-//   alienPosition = alienPosition + 20;
-//   placeAlien(alienPosition);
-// }
-
-// //   createGrid();
-// //   window.addEventListener("keydown", movePlayer);
-// //   window.addEventListener("keydown", playerShoot);
-// // }
-// // document.addEventListener("DOMContentLoaded", init);
+function moveAlienLeft() {
+  removeAlien(alienPosition);
+  alienPosition--;
+  placeAlien(alienPosition);
+}
+function checkEdge() {
+  // leftToRight ^= true;
+  moveAlienDown();
+}
+function moveAlienDown() {
+  removeAlien(alienPosition);
+  alienPosition = alienPosition + 20;
+  placeAlien(alienPosition);
+}
+function removeAlien(alienPosition){
+  cells[alienPosition].classList.remove("alien");
+}
