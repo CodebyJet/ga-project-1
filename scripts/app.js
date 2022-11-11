@@ -5,8 +5,8 @@ document.addEventListener("DOMContentLoaded", init); //page loads and does the i
 // function init() {
 const grid = document.querySelector(".grid");
 const start = document.querySelector(".startBtn");
-// const graphics = document.querySelector(".graphicsBtn");
-// const sound = document.querySelector("soundBtn");
+const graphics = document.querySelector(".graphicsBtn");
+const sound = document.querySelector("soundBtn");
 const scoreDisplay = document.querySelector("#score-display");
 const cells = [];
 const width = 20;
@@ -23,9 +23,7 @@ function init() {
   window.addEventListener("keydown", movePlayer);
   window.addEventListener("keydown", playerShoot);
 }
-
-//todo function startGame(){} put the grid, playerplace and alienplace and move
-
+//todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement("div");
