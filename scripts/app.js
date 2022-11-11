@@ -8,7 +8,7 @@ const start = document.querySelector(".startBtn");
 const graphics = document.querySelector(".graphicsBtn");
 const sound = document.querySelector(".soundBtn");
 const backgroundSound = document.querySelector(".backgroundSound")
-// const pew = document.querySelector(".pewPew") currently causing 2 grids
+const pew = document.querySelector(".pewPew")
 const scoreDisplay = document.querySelector("#score-display");
 const cells = [];
 const width = 20;
@@ -20,9 +20,11 @@ let playerPosition = 389;
 let interval;
 let travelDistance = 19;
 let score = 0
+let goingRight = true;
+let movement = 1;
 const alienPosition = [
-  4, 6, 8, 10, 12, 14, 25, 27, 29, 31, 33, 35, 44, 46, 48, 50, 52, 54, 65, 67,
-  69, 71, 73, 75
+  4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
+  68, 69, 70, 71, 72, 73, 74, 75
 ];
 
 
@@ -43,7 +45,7 @@ function createGrid() {
   }
   placePlayer(playerPosition);
   placeAlien();
-  moveAlien()
+  setInterval(moveAlien, 500);
 }
 
 function backgroundMusic(){
@@ -94,14 +96,17 @@ function removePlayer(cellNumber) {
 }
 
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
-// let ableToShoot = true
+// keeping ability to shoot tied to travel distant, now i just need to do it
+// so travel distance is reset more
 
 function playerShoot(event) {
   if (event.keyCode === 32) {
-    console.log(cells)
-    missilePosition = playerPosition - 20;
-    cells[missilePosition].classList.add("missile");
-    startMissile();
+    event.preventDefault();
+    if (travelDistance === 19){
+      missilePosition = playerPosition - 20;
+      cells[missilePosition].classList.add("missile");
+      startMissile();
+    }
   }
 }
 function removeMissile(cellNumber) {
@@ -111,101 +116,70 @@ function addMissile(cellNumber) {
   cells[missilePosition].classList.add("missile");
 }
 function startMissile() {
-  interval = setInterval(missileTravel, 75); //was originally 250
+  interval = setInterval(missileTravel, 75); 
 }
 
 function missileTravel() {
   if (travelDistance > 1) {
-    // checkIfHit()
+    checkIfHit()
     removeMissile();
     missilePosition = missilePosition - 20;
     addMissile();
     travelDistance--;
   } else {
     endMissile();
+    travelDistance = 19;
   }
 }
 function endMissile() {
-  clearInterval(interval);
   removeMissile();
-  travelDistance = 19
+  clearInterval(interval);
 }
 
-// function checkIfHit(){
-//   if (cells[missilePosition - 20].classList.contains("alien")){
-//     for ( let i = 0; i < alienPosition.length; i++){ 
-//       if ( alienPosition[i] === missilePosition - 20) { 
-//         alienPosition.splice(i, 1); 
-//         endMissile()
-//         scoreUp()
-//       }
-//   }}
-// }
+function checkIfHit(){
+  if (cells[missilePosition - 20].classList.contains("alien")){
+    for ( let i = 0; i < alienPosition.length; i++){ 
+      if ( alienPosition[i] === missilePosition) { 
+        alienPosition.splice(i, 1);
+        // endMissile()
+        // travelDistance = 19
+        scoreUp()
+      }
+    }
+  }
+}
 
 function scoreUp(){
   score += 100
   scoreDisplay.innerHTML = score
 }
-
-//todo alien movement --- will add in multiple aliens when i get 1 going
-//todo potentially making all of this an array, witch switch methods?
-// let leftToRight = true;
-const rightSide = [
-  19, 39, 59, 79, 99, 119, 139, 159, 179, 199, 219, 239, 259, 279, 299, 319,
-  339, 359, 379
-];
-const leftSide = [
-  0, 20, 40, 60, 80, 90, 100, 120, 140, 160, 180, 200, 220, 240, 260, 280, 300,
-  320, 340, 360
-];
-
+//todo re-write moveAlien to something nicer to look at
 function moveAlien() {
-  // const x = alienPosition % width;
-  // const y = Math.floor(alienPosition / width);
-  setInterval(() => {
-    if (alienPosition.filter((position) => rightSide.includes(position))) {
-      moveAlienDown();
-    } else if (alienPosition.filter((position) => leftSide.includes(position))) {
-      moveAlienDown();
-    } else {
-      moveAlienRight();
+  const leftSide = alienPosition[0] % width === 0
+  const rightSide = alienPosition[alienPosition.length - 1] % width === width -1;
+  removeAlien()
+
+  if (goingRight && rightSide){
+    for (let i = 0; i < alienPosition.length; i++) {
+      alienPosition[i] += width + 1
+      movement = -1
+      goingRight = false
     }
-  }, 1000);
-}
-
-//
-
-//todo make alien an array and this a forEach
-function moveAlienRight() {
-  removeAlien(alienPosition);
-  for (let i = 0; i < alienPosition.length; i++) {
-    alienPosition[i] += 1 ;
   }
-  placeAlien();
-}
-
-function moveAlienLeft() {
-  removeAlien(alienPosition);
-  for (let i = 0; i < alienPosition.length; i++) {
-    alienPosition[i] -= 1 ;
+  if (leftSide && !goingRight){
+    for (let i = 0; i < alienPosition.length; i++) {
+      alienPosition[i] += width - 1
+      movement = 1
+      goingRight = true
+    }
   }
-  placeAlien();
-}
-// function checkEdge() {
-//   // leftToRight ^= true;
-//   moveAlienDown();
-// }
-function moveAlienDown() {
-  removeAlien(alienPosition);
   for (let i = 0; i < alienPosition.length; i++) {
-    alienPosition[i] += 20;
+    alienPosition[i] += movement
   }
-  placeAlien();
+  placeAlien()
 }
 function removeAlien(){
   for (let i = 0; i < alienPosition.length; i++) {
     cells[alienPosition[i]].classList.remove("alien");
   }
 }
-
-//

@@ -42,7 +42,7 @@ body {
 }
 
 .grid div {
-  border: 1px solid lightgrey;
+  /* border: 1px solid lightgrey; */
   height: 5%;
   width: 5%;
 }
@@ -50,7 +50,11 @@ body {
   background-color: red;
 }
 .alien{
-  background-color: blue;
+  background-image: url(../images/blueAlien.png);
+  background-size: contain ;
+}
+.graphicsBtn{
+  /* display: none; */
 }
 
 .missile{

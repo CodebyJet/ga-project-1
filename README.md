@@ -27,3 +27,5 @@ restarting the game
 
 First Day
 JUst planning on excalidraw
+
+Most of the second day was just trying to make the alien move right, then down, then left and down - repeat
