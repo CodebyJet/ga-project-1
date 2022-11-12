@@ -14,18 +14,28 @@ const cells = [];
 const width = 20;
 const gridCellCount = width * width;
 
-let toPlay = true;
-let missilePosition;
-let playerPosition = 389;
-let interval;
-let travelDistance = 19;
-let score = 0
-let goingRight = true;
-let movement = 1;
 const alienPosition = [
+  4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32,
+  33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
+  68, 69, 70, 71, 72, 73, 74, 75,
+];
+
+const respawning = [
   4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
   68, 69, 70, 71, 72, 73, 74, 75
 ];
+
+
+let score = 0
+let toPlay = true;
+let playerPosition = 389;
+let goingRight = true;
+let movement = 1;
+let interval;
+let secondInterval
+let missilePosition;
+let travelDistance = 19;
+const lifeCount = 3
 
 
 function init() {
@@ -33,6 +43,7 @@ function init() {
   window.addEventListener("keydown", playerShoot);
   start.addEventListener("click", createGrid);
   sound.addEventListener("click", backgroundMusic);
+  graphics.addEventListener("click", graphicalUpdate)
 }
 
 //todo function startGame(){} playerplace, alienplace and move
@@ -45,9 +56,8 @@ function createGrid() {
   }
   placePlayer(playerPosition);
   placeAlien();
-  setInterval(moveAlien, 500);
+  secondInterval = setInterval(moveAlien, 500);
 }
-
 function backgroundMusic(){
   if (toPlay){
     backgroundSound.src = "./sound/backGroundMusic.mp3"
@@ -59,12 +69,13 @@ function backgroundMusic(){
     toPlay = true
   }
 }
-
-
+//todo window prompt joke nad styling with classes
+function graphicalUpdate(event){
+  graphics.style.display = "none"
+}
 function placePlayer(playerPosition) {
   cells[playerPosition].classList.add("player");
 }
-
 function placeAlien(){
   for (let i = 0; i < alienPosition.length; i++){
     cells[alienPosition[i]].classList.add("alien")
@@ -116,38 +127,51 @@ function addMissile(cellNumber) {
   cells[missilePosition].classList.add("missile");
 }
 function startMissile() {
-  interval = setInterval(missileTravel, 75); 
+  interval = setInterval(missileTravel, 25); 
 }
-
 function missileTravel() {
   if (travelDistance > 1) {
-    checkIfHit()
     removeMissile();
     missilePosition = missilePosition - 20;
     addMissile();
     travelDistance--;
+    checkIfHit()
   } else {
+    removeMissile()
+    checkIfHit()
     endMissile();
-    travelDistance = 19;
   }
 }
 function endMissile() {
-  removeMissile();
+  travelDistance = 19;
+  console.log(travelDistance)
   clearInterval(interval);
+  removeMissile()
 }
-
 function checkIfHit(){
-  if (cells[missilePosition - 20].classList.contains("alien")){
+  if (cells[missilePosition].classList.contains("alien")){
+    scoreUp();
     for ( let i = 0; i < alienPosition.length; i++){ 
       if ( alienPosition[i] === missilePosition) { 
+        cells[alienPosition[i]].classList.remove("alien");
         alienPosition.splice(i, 1);
-        // endMissile()
-        // travelDistance = 19
-        scoreUp()
+        checkRespawn()
       }
     }
+    endMissile();
   }
 }
+
+function checkRespawn(){
+  if (alienPosition.length === 0){
+    clearInterval(secondInterval);
+    respawning.forEach((spawn)=> alienPosition.push(spawn))
+    placeAlien()
+    secondInterval = setInterval(moveAlien, 500);
+  }
+}
+
+
 
 function scoreUp(){
   score += 100
@@ -156,7 +180,7 @@ function scoreUp(){
 //todo re-write moveAlien to something nicer to look at
 function moveAlien() {
   const leftSide = alienPosition[0] % width === 0
-  const rightSide = alienPosition[alienPosition.length - 1] % width === width -1;
+  const rightSide = alienPosition[alienPosition.length - 1] % width === width - 1;
   removeAlien()
 
   if (goingRight && rightSide){
