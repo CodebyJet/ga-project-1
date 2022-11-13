@@ -63,16 +63,24 @@ body {
   width: 5%;
 }
 .player{
-  background-color: red;
+  /* background-color: red; */
+  background-image: url(../images/playerShip.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
 }
 .alien{
-  background-color: #1FFFFB;
-  /* background-image: url(../images/blueAlien.png); */
+  /* background-color: #1FFFFB; */
+  background-image: url(../images/pinkAlien.png);
   background-position: center;
   background-size: contain;
 }
 .laser{
-  background-color: blueviolet;
+  /* background-color: blueviolet; */
+  background-image: url(../images/laserBeam.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 .divBackGrd{
   background-image: url(../images/pixelBckGrd.jpg);

@@ -87,20 +87,23 @@ function backgroundMusic(){
 }
 //todo window prompt joke nad styling with classes
 function graphicalUpdate(event){
-  updatedLook += 1;
-  graphics.style.display = "none"
-  grid.classList.add("divBackGrd");
-  body.classList.add("graphicalBody");
-  start.classList.add("redButton")
-  linkGit.classList.add("linkGit");
-  heartCounter.innerHTML = ""
-  heartCounter.classList.add("heartsDisplay")
-  title.textContent = "Defender!"
-  title.classList.add("title")
-  sound.classList.add("soundButton");
-  pTag.textContent = "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!"
-  pTag.classList.add("pStyle")
-  pScore.classList.add("pStyle")
+  let enable = confirm("Graphics?! In this economy?... Sure, if you slide me 5 bucks?")
+  if(enable){
+    updatedLook += 1;
+    graphics.style.display = "none"
+    grid.classList.add("divBackGrd");
+    body.classList.add("graphicalBody");
+    start.classList.add("redButton")
+    linkGit.classList.add("linkGit");
+    heartCounter.innerHTML = ""
+    heartCounter.classList.add("heartsDisplay")
+    title.textContent = "Defender!"
+    title.classList.add("title")
+    sound.classList.add("soundButton");
+    pTag.textContent = "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!"
+    pTag.classList.add("pStyle")
+    pScore.classList.add("pStyle")
+  }
 }
 function placePlayer(playerPosition) {
   cells[playerPosition].classList.add("player");
@@ -322,6 +325,7 @@ function endGame() {
   clearInterval(interval)
   clearInterval(secondInterval)
   start.disabled = false;
+  removeAlien(alienPosition)
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
 }
