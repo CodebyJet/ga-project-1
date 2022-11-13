@@ -18,34 +18,28 @@ const title = document.querySelector("h1")
 const pTag = document.querySelector(".pTag")
 const pScore = document.querySelector(".pScore")
 const lives = document.querySelector(".lives")
+const highScoreDisplay = document.querySelector(".highScore")
 const cells = [];
-const width = 20;
+const width = 10;
 const gridCellCount = width * width;
 
-const alienPosition = [
-  4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32,
-  33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
-  68, 69, 70, 71, 72, 73, 74, 75
-];
+const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 
-const respawning = [
-  4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
-  68, 69, 70, 71, 72, 73, 74, 75
-];
+const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 
 let updatedLook = 0
 let score = 0
 let toPlay = true;
-let playerPosition = 389;
+let playerPosition = 95;
 let goingRight = true;
 let movement = 1;
-let interval;
-let secondInterval;
-let forthInterval;
+let missileInterval;
+let alienInterval;
+let laserInterval;
 let missilePosition;
 let laserPosition;
-let travelDistance = 19;
-let laserDistance = 19;
+let travelDistance = 9;
+
 let lifeCount = 3;
 let aliensCanShoot = true;
 
@@ -59,7 +53,6 @@ function init() {
 
 //todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
-  heartCounter.style.backgroundImage = "";
   grid.classList.remove("gameOverScreen");
   start.disabled = true;
   aliensCanShoot = true
@@ -71,7 +64,7 @@ function createGrid() {
   }
   placePlayer(playerPosition);
   placeAlien();
-  secondInterval = setInterval(moveAlien, 500);
+  alienInterval = setInterval(moveAlien, 500);
 }
 function backgroundMusic(){
   if (toPlay){
@@ -87,8 +80,8 @@ function backgroundMusic(){
 }
 //todo window prompt joke nad styling with classes
 function graphicalUpdate(event){
-  let enable = confirm("Graphics?! In this economy?... Sure, if you slide me 5 bucks?")
-  if(enable){
+  const enable = confirm("Graphics?! In this economy?... Sure, if you slide me 5 bucks?")
+  if (enable){
     updatedLook += 1;
     graphics.style.display = "none"
     grid.classList.add("divBackGrd");
@@ -144,8 +137,8 @@ function removePlayer(cellNumber) {
 function playerShoot(event) {
   if (event.keyCode === 32) {
     event.preventDefault();
-    if (travelDistance === 19){
-      missilePosition = playerPosition - 20;
+    if (travelDistance === 9){
+      missilePosition = playerPosition - 10;
       smokePoof(missilePosition);
       startMissile();
       pew.play()
@@ -165,12 +158,12 @@ function addMissile(cellNumber) {
   cells[missilePosition].classList.add("missile");
 }
 function startMissile() {
-  interval = setInterval(missileTravel, 25); 
+  missileInterval = setInterval(missileTravel, 75); 
 }
 function missileTravel() {
   if (travelDistance > 1) {
     removeMissile();
-    missilePosition = missilePosition - 20;
+    missilePosition = missilePosition - 10;
     addMissile();
     travelDistance--;
     checkIfHit()
@@ -181,8 +174,8 @@ function missileTravel() {
   }
 }
 function endMissile() {
-  travelDistance = 19;
-  clearInterval(interval);
+  travelDistance = 9;
+  clearInterval(missileInterval);
   removeMissile()
 }
 function checkIfHit(){
@@ -200,10 +193,10 @@ function checkIfHit(){
 }
 function checkRespawn(){
   if (alienPosition.length === 0){
-    clearInterval(secondInterval);
+    clearInterval(alienInterval);
     respawning.forEach((spawn)=> alienPosition.push(spawn))
     placeAlien()
-    secondInterval = setInterval(moveAlien, 500);
+    alienInterval = setInterval(moveAlien, 500);
   }
 }
 function scoreUp(){
@@ -242,14 +235,14 @@ function removeAlien(){
   }
 }
 function checkDefeat(){
-  const finishLine = [380, 381, 382, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399]
+  const finishLine = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99]
   if (alienPosition.some(value => finishLine.includes(value))){
     endGame()
   }
 }
 function alienShoots(){
   if (aliensCanShoot){
-    laserPosition = alienPosition[Math. floor(Math.random() * alienPosition.length)];
+    laserPosition = alienPosition[Math. floor(Math.random() * alienPosition.length)] + 10;
     cells[laserPosition].classList.add("laser");
     startLaser();
     pew.play();
@@ -257,7 +250,7 @@ function alienShoots(){
   }
 }
 function startLaser() {
-  forthInterval = setInterval(laserTravel, 100);
+  laserInterval = setInterval(laserTravel, 250);
 }
 function addLaser(){
   cells[laserPosition].classList.add("laser");
@@ -266,11 +259,11 @@ function removeLaser(cellNumber) {
   cells[laserPosition].classList.remove("laser");
 }
 function laserTravel() {
-  if (laserPosition < 380) {
+  if (laserPosition < 90) {
     removeLaser();
-    laserPosition = laserPosition + 20;
+    laserPosition = laserPosition + 10;
     addLaser();
-    laserDistance--;
+
     checkForPlayer();
   } else {
     aliensCanShoot = true
@@ -289,7 +282,7 @@ function checkForPlayer() {
 }
 function endLaser(){
   removeLaser();
-  clearInterval(forthInterval);
+  clearInterval(laserInterval);
 }
 function playerGetsShot(){
   if (lifeCount === 3){
@@ -316,16 +309,29 @@ function playerGetsShot(){
 }
 function endGame() {
   aliensCanShoot = false;
+  removeAlien(alienPosition)
+  storeScore()
   grid.classList.add("gameOverScreen");
   setTimeout(() => {
-    alert(`You did your best cadet! We managed to evacuate ${score} people`);
+    alert(`You did your best Cadet! We managed to evacuate ${score} people`);
     score = 0
     scoreDisplay.innerHTML = score;
   }, 250);
-  clearInterval(interval)
-  clearInterval(secondInterval)
+  highScoreDisplay.innerHTML = highscores
+  heartCounter.style.backgroundImage = "";
+  clearInterval(missileInterval);
+  clearInterval(alienInterval)
   start.disabled = false;
-  removeAlien(alienPosition)
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
+  removePlayer(playerPosition)
+}
+const highscores = []
+
+function storeScore(){
+  const playerName = prompt("Whats your name Space Cadet?")
+  const newScore = { score, playerName }
+  highscores.push(newScore),
+  highscores.sort((a,b) => b.score - a.score)
+  localStorage.setItem(score, playerName)
 }

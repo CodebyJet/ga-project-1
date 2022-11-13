@@ -41,7 +41,7 @@ body {
   min-height: 50vh;
 }
 .grid-wrapper {
-  height: 90vh;
+  /* height: 90vh; */
   display: flex;
   justify-content: center;
 }
@@ -58,9 +58,8 @@ body {
   background-size: contain;
 }
 .grid div {
-  /* border: 1px solid lightgrey; */
-  height: 5%;
-  width: 5%;
+  height: 10%;
+  width: 10%;
 }
 .player{
   /* background-color: red; */
@@ -69,15 +68,16 @@ body {
   background-position: center;
   background-size: contain;
 }
-.alien{
-  /* background-color: #1FFFFB; */
-  background-image: url(../images/pinkAlien.png);
-  background-position: center;
-  background-size: contain;
-}
 .laser{
   /* background-color: blueviolet; */
   background-image: url(../images/laserBeam.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.alien{
+  /* background-color: #1FFFFB; */
+  background-image: url(../images/pinkAlien.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
@@ -200,5 +200,56 @@ body {
   }
   100%{
     width: 150px;
+  }
+}
+
+@media only screen and (max-width: 1250px){
+  .pStyle{
+  font-size: 15px;
+  padding: 0px 20px;
+  }.grid{
+  height: 700px;
+  width: 700px;
+  }
+}
+@media only screen and (max-width: 1000px){
+  .grid{
+  height: 600px;
+  width: 600px;
+  }
+  .pStyle{
+    font-size: 10px;
+  }.
+}
+@media only screen and (max-width: 850px){
+  .gameDisplay{
+    flex-direction: column-reverse;
+  }.grid{
+  height: 500px;
+  width: 500px;
+  }
+  .graphicalBody{
+    padding-top: 40px;
+    justify-content: space-between;
+
+  }
+  .linkGit{
+    display: none;
+  }
+  .controls-wrapper{
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .pTag{
+    display: none;
+  }
+}
+@media only screen and (max-width: 500px){
+  .grid{
+  height: 300px;
+  width: 300px;
+  }
+  .controls-wrapper{
+    max-width: 350px;
   }
 }
