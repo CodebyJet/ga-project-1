@@ -14,12 +14,40 @@ body {
   background-image: url(../images/spaceBackground.jpg);
   background-position: center;
 }
+.header{
+  position: relative;
+}
 .title{
   font-family: 'Press Start 2P', cursive;
-  text-shadow: 2px 4px rgb(249, 170, 25);
-  color: #a7fcc1;
+  color: #cbffdb;
   text-decoration: underline;
   font-style: italic;
+  font-size: 4rem;
+  text-transform: uppercase;
+  text-shadow: 
+  0.25em 0 0 rgb(11, 200, 214),
+  -0.1em -0.1em 0 #f3e636,
+  0.15em 0.15em 0 #f56def;
+  animation: glitch 500ms infinite;
+}
+.header span{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.title span:first-child{
+  animation: glitch 650ms infinite;
+  /* color: red; */
+  z-index: 1;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  transform: translate(0.15em, -0.025em);
+}
+.title span:last-child{
+  animation: glitch 375ms infinite;
+  z-index: 1;
+  /* color: greenyellow; */
+  clip-path: polygon(0 60%, 110% 60%, 110% 100%, 0 110%);
+  transform: translate(-0.15em, 0.025em);
 }
 .pStyle{
   font-family: 'Press Start 2P', cursive;
@@ -202,6 +230,44 @@ body {
     width: 150px;
   }
 }
+@keyframes glitch {
+  0% {
+    text-shadow: 
+  0.05em 0 0 rgb(11, 200, 214),
+  -0.05em -0.025em 0 #f3e636,
+  -0.025em 0.05em 0 #f56def;
+  }  14% {
+    text-shadow: 
+  0.05em 0 0 rgb(11, 200, 214),
+  -0.05em -0.025em 0 #f3e636,
+  -0.025em 0.05em 0 #f56def;
+  } 15% {
+    text-shadow: 
+  -0.05em -0.025em 0 rgb(11, 200, 214),
+  0.025em 0.025em 0 #f3e636,
+  -0.05em -0.05em 0 #f56def;
+  } 49% {
+    text-shadow: 
+  -0.05em -0.025em 0 rgb(11, 200, 214),
+  0.025em 0.025em 0 #f3e636,
+  -0.05em -0.05em 0 #f56def;
+  } 50% {
+    text-shadow: 
+  0.025em 0.05em 0 rgb(11, 200, 214),
+  0.05em 0 0 #f3e636,
+  0 -0.05em 0 #f56def;
+  } 99% {
+    text-shadow: 
+  0.025em 0.05em 0 rgb(11, 200, 214),
+  0.05em 0 0 #f3e636,
+  0 -0.05em 0 #f56def;
+  } 100% {
+    text-shadow: 
+  -0.025em 0 0 rgb(11, 200, 214),
+  -0.025em -0.025em 0 #f3e636,
+  -0.025em -0.05em 0 #f56def;
+  }
+}
 
 @media only screen and (max-width: 1250px){
   .pStyle{
@@ -242,6 +308,11 @@ body {
   }
   .pTag{
     display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .title{
+    font-size: 3rem;
   }
 }
 @media only screen and (max-width: 500px){

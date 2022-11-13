@@ -14,7 +14,7 @@ const pew = document.querySelector(".pewPew")
 const scoreDisplay = document.querySelector("#score-display");
 const linkGit = document.querySelector(".git")
 const heartCounter = document.querySelector(".hearts")
-const title = document.querySelector("h1")
+const title = document.querySelector(".header")
 const pTag = document.querySelector(".pTag")
 const pScore = document.querySelector(".pScore")
 const lives = document.querySelector(".lives")
@@ -90,7 +90,6 @@ function graphicalUpdate(event){
     linkGit.classList.add("linkGit");
     heartCounter.innerHTML = ""
     heartCounter.classList.add("heartsDisplay")
-    title.textContent = "Defender!"
     title.classList.add("title")
     sound.classList.add("soundButton");
     pTag.textContent = "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!"
