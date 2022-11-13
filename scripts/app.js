@@ -16,6 +16,7 @@ const heartCounter = document.querySelector(".hearts")
 const title = document.querySelector("h1")
 const pTag = document.querySelector(".pTag")
 const pScore = document.querySelector(".pScore")
+const lives = document.querySelector(".lives")
 const cells = [];
 const width = 20;
 const gridCellCount = width * width;
@@ -70,7 +71,6 @@ function backgroundMusic(){
     backgroundSound.src = "./sound/backGroundMusic.mp3"
     backgroundSound.play();
     backgroundSound.loop;
-    console.log(toPlay)
     toPlay = false
     pew.src = "./sound/pew-pew.mp3"
   } else {
@@ -206,7 +206,7 @@ function moveAlien() {
   const leftSide = alienPosition[0] % width === 0
   const rightSide = alienPosition[alienPosition.length - 1] % width === width - 1;
   removeAlien()
-
+  checkDefeat()
   if (goingRight && rightSide){
     for (let i = 0; i < alienPosition.length; i++) {
       alienPosition[i] += width + 1
@@ -231,21 +231,36 @@ function removeAlien(){
     cells[alienPosition[i]].classList.remove("alien");
   }
 }
+function checkDefeat(){
+  const finishLine = [380, 381, 382, 384, 385, 386, 387, 388, 389, 390, 391, 392, 393, 394, 395, 396, 397, 398, 399]
+  if (alienPosition.some(value => finishLine.includes(value))){
+    endGame()
+  }
+}
+
 function alienShoots(){
   console.log("add everything here")
 }
 function playerGetsShot(){
-  console.log("rip")
-  lifeCount = 2
-  heartCounter.style.backgroundImage = "url(../images/2heart.png)";
-  lifeCount = 1
-  heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+  if (lifeCount === 3){
+    lifeCount = 2;
+    lives.textContent = lifeCount
+    heartCounter.style.backgroundImage = "url(../images/2heart.png)";
+  } else if (lifeCount === 2){
+    lifeCount = 1;
+    heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+  } else if (lifeCount === 1 ){
+    lifeCount = 1
+    heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+  } else {
+    endGame()
+  }
 }
 
-
 function endGame() {
-  clearInterval(secondInterval);
   removeAlien();
-  alert(score);
+  lifeCount = 3
+  alert(`You did your best cadet! We managed to evacuate ${score} people`);
+  clearInterval(secondInterval);
   start.disabled = false;
 }
