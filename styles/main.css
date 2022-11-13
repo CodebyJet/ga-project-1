@@ -71,7 +71,9 @@ body {
   background-position: center;
   background-size: contain;
 }
-
+.laser{
+  background-color: blueviolet;
+}
 .divBackGrd{
   background-image: url(../images/pixelBckGrd.jpg);
   background-position: center;
@@ -134,7 +136,9 @@ body {
   height: 45px;
   cursor: pointer;
 }
-
+.gameOverScreen{
+  background-image: url(../images/gameOver.jpg);
+}
 ::-webkit-scrollbar {
   width: 10px;
 }

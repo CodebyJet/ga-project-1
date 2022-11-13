@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", init); //page loads and does the i
 
 // function init() {
 const grid = document.querySelector(".grid");
+const gridWrapper = document.querySelector(".grid-wrapper")
 const body = document.querySelector("body")
 const start = document.querySelector(".startBtn");
 const graphics = document.querySelector(".graphicsBtn");
@@ -39,11 +40,15 @@ let playerPosition = 389;
 let goingRight = true;
 let movement = 1;
 let interval;
-let secondInterval
+let secondInterval;
+let thirdInterval;
+let forthInterval;
 let missilePosition;
+let laserPosition;
 let travelDistance = 19;
-let lifeCount = 3
-
+let laserDistance = 19;
+let lifeCount = 3;
+let aliensCanShoot = true;
 
 function init() {
   window.addEventListener("keydown", movePlayer);
@@ -55,7 +60,9 @@ function init() {
 
 //todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
+  grid.classList.remove("gameOverScreen");
   start.disabled = true;
+  aliensCanShoot = true
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement("div");
     cell.setAttribute("data-index", i);
@@ -101,6 +108,9 @@ function placePlayer(playerPosition) {
 function placeAlien(){
   for (let i = 0; i < alienPosition.length; i++){
     cells[alienPosition[i]].classList.add("alien")
+  }
+  if (aliensCanShoot){
+    thirdInterval = setInterval(alienShoots, 3000)
   }
 }
 //player controls
@@ -172,7 +182,6 @@ function missileTravel() {
 }
 function endMissile() {
   travelDistance = 19;
-  console.log(travelDistance)
   clearInterval(interval);
   removeMissile()
 }
@@ -238,29 +247,91 @@ function checkDefeat(){
   }
 }
 
+
+
+
 function alienShoots(){
-  console.log("add everything here")
+  if (aliensCanShoot){
+    laserPosition = alienPosition[Math. floor(Math.random() * alienPosition.length)];
+    cells[laserPosition].classList.add("laser");
+    startLaser();
+    pew.play();
+    aliensCanShoot = false;
+  }
 }
+function startLaser() {
+  forthInterval = setInterval(laserTravel, 100);
+}
+function addLaser(){
+  cells[laserPosition].classList.add("laser");
+}
+function removeLaser(cellNumber) {
+  cells[laserPosition].classList.remove("laser");
+}
+function laserTravel() {
+  if (laserPosition < 380) {
+    removeLaser();
+    laserPosition = laserPosition + 20;
+    addLaser();
+    laserDistance--;
+    checkForPlayer();
+  } else {
+    aliensCanShoot = true
+    removeLaser();
+    checkForPlayer();
+    endLaser();
+  }
+}
+function checkForPlayer() {
+  if (cells[laserPosition].classList.contains("player")) {
+    playerGetsShot();
+    removeLaser();
+    endLaser();
+    aliensCanShoot = true;
+  }
+}
+function endLaser(){
+  removeLaser();
+  clearInterval(forthInterval);
+}
+
+
+
+
+
+
 function playerGetsShot(){
   if (lifeCount === 3){
-    lifeCount = 2;
-    lives.textContent = lifeCount
-    heartCounter.style.backgroundImage = "url(../images/2heart.png)";
+    if (updatedLook === 1){
+      heartCounter.style.backgroundImage = "url(../images/2heart.png)";
+      lifeCount = 2;
+    } else {
+      lifeCount = 2;
+      lives.textContent = lifeCount
+    }
   } else if (lifeCount === 2){
-    lifeCount = 1;
-    heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
-  } else if (lifeCount === 1 ){
-    lifeCount = 1
-    heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+    if (updatedLook === 1) {
+      heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+      lifeCount = 1;
+    } else {
+      lifeCount = 1;
+      lives.textContent = lifeCount;
+    }
   } else {
     endGame()
   }
 }
-
 function endGame() {
-  removeAlien();
+  aliensCanShoot = false
+  grid.classList.add("gameOverScreen");
   lifeCount = 3
-  alert(`You did your best cadet! We managed to evacuate ${score} people`);
+  setTimeout(() => {
+    alert(`You did your best cadet! We managed to evacuate ${score} people`);
+    score = 0
+    scoreDisplay.innerHTML = score;
+  }, 250);
   clearInterval(secondInterval);
+  alienPosition.splice(0, alienPosition.length);
+  respawning.forEach((spawn) => alienPosition.push(spawn));
   start.disabled = false;
 }
