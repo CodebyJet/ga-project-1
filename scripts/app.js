@@ -72,6 +72,7 @@ function backgroundMusic(){
 //todo window prompt joke nad styling with classes
 function graphicalUpdate(event){
   graphics.style.display = "none"
+  grid.classList.add("divBackGrd");
 }
 function placePlayer(playerPosition) {
   cells[playerPosition].classList.add("player");
@@ -81,7 +82,6 @@ function placeAlien(){
     cells[alienPosition[i]].classList.add("alien")
   }
 }
-
 //player controls
 function movePlayer(event) {
   const x = playerPosition % width;
@@ -115,10 +115,17 @@ function playerShoot(event) {
     event.preventDefault();
     if (travelDistance === 19){
       missilePosition = playerPosition - 20;
-      cells[missilePosition].classList.add("missile");
+      smokePoof(missilePosition);
       startMissile();
     }
   }
+}
+//cells[missilePosition].classList.add("missile");
+function smokePoof(missilePosition) {
+  cells[missilePosition].classList.add("smoke");
+  setTimeout(() => {
+    cells[missilePosition].classList.remove("smoke");
+  }, 250);
 }
 function removeMissile(cellNumber) {
   cells[missilePosition].classList.remove("missile");
@@ -161,7 +168,6 @@ function checkIfHit(){
     endMissile();
   }
 }
-
 function checkRespawn(){
   if (alienPosition.length === 0){
     clearInterval(secondInterval);
@@ -170,9 +176,6 @@ function checkRespawn(){
     secondInterval = setInterval(moveAlien, 500);
   }
 }
-
-
-
 function scoreUp(){
   score += 100
   scoreDisplay.innerHTML = score

@@ -39,6 +39,8 @@ body {
   justify-content: center;
   height: 800px;
   width: 800px;
+  background-image: url(../images/default.jpg);
+  background-size: contain;
 }
 
 .grid div {
@@ -50,16 +52,27 @@ body {
   background-color: red;
 }
 .alien{
-  background-image: url(../images/blueAlien.png);
-  background-size: contain ;
+  background-color: blue;
 }
 .graphicsBtn{
   
 }
-
+.divBackGrd{
+  background-image: url(../images/pixelBckGrd.jpg);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 .missile{
   background-color: green;
 }
+.smoke{ 
+  background-image: url(../images/smokePoof.png);
+  background-size: contain ;
+  background-repeat: no-repeat;
+}
+
+
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -74,3 +87,7 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(109, 210, 8);
 }
+
+/*  background-image: url(../images/blueAlien.png);
+  background-size: contain ;
+  */
