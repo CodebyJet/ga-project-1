@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", init); //page loads and does the i
 
 // function init() {
 const grid = document.querySelector(".grid");
+const body = document.querySelector("body")
 const start = document.querySelector(".startBtn");
 const graphics = document.querySelector(".graphicsBtn");
 const sound = document.querySelector(".soundBtn");
@@ -62,8 +63,10 @@ function backgroundMusic(){
   if (toPlay){
     backgroundSound.src = "./sound/backGroundMusic.mp3"
     backgroundSound.play();
+    backgroundSound.loop;
     console.log(toPlay)
     toPlay = false
+    pew.src = "./sound/pew-pew.mp3"
   } else {
     backgroundSound.pause();
     toPlay = true
@@ -73,6 +76,7 @@ function backgroundMusic(){
 function graphicalUpdate(event){
   graphics.style.display = "none"
   grid.classList.add("divBackGrd");
+  body.classList.add("graphicalBody");
 }
 function placePlayer(playerPosition) {
   cells[playerPosition].classList.add("player");
@@ -117,6 +121,7 @@ function playerShoot(event) {
       missilePosition = playerPosition - 20;
       smokePoof(missilePosition);
       startMissile();
+      pew.play()
     }
   }
 }

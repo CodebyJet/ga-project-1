@@ -29,3 +29,15 @@ First Day
 JUst planning on excalidraw
 
 Most of the second day was just trying to make the alien move right, then down, then left and down - repeat
+
+second day
+
+movement of the aliens was difficult
+player movement done
+
+
+third day
+shooting the aliens complete
+added smoke effects on a timer
+registered the alien deaths and increased the score
+did some rough css styling
