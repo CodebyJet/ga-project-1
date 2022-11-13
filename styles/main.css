@@ -1,12 +1,11 @@
 * {
   box-sizing: border-box;
 }
-
 body {
   height: 100vh;
   margin: 0;
   display: flex;
-  color: wheat;
+  color: limegreen;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -15,12 +14,24 @@ body {
   background-image: url(../images/spaceBackground.jpg);
   background-position: center;
 }
-
+.title{
+  font-family: 'Press Start 2P', cursive;
+  text-shadow: 2px 4px rgb(249, 170, 25);
+  color: #a7fcc1;
+  text-decoration: underline;
+  font-style: italic;
+}
+.pStyle{
+  font-family: 'Press Start 2P', cursive;
+  color: #a7fcc1;
+  max-width: 400px;
+  text-shadow: 0px 4px black;
+}
 .gameDisplay{
   display: flex;
 }
 .controls-wrapper {
-  height: 10vh;
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,13 +40,11 @@ body {
   padding: 20px;
   min-height: 50vh;
 }
-
 .grid-wrapper {
   height: 90vh;
   display: flex;
   justify-content: center;
 }
-
 .grid {
   align-items: center;
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
@@ -48,7 +57,6 @@ body {
   background-image: url(../images/default.jpg);
   background-size: contain;
 }
-
 .grid div {
   /* border: 1px solid lightgrey; */
   height: 5%;
@@ -58,11 +66,12 @@ body {
   background-color: red;
 }
 .alien{
-  background-color: blue;
+  background-color: #1FFFFB;
+  /* background-image: url(../images/blueAlien.png); */
+  background-position: center;
+  background-size: contain;
 }
-.graphicsBtn{
-  
-}
+
 .divBackGrd{
   background-image: url(../images/pixelBckGrd.jpg);
   background-position: center;
@@ -83,8 +92,48 @@ body {
   background-size: contain ;
   background-repeat: no-repeat;
 }
+.linkGit{
+  background-image: url(../images/astroLogo.jpg);
+  width: 100px;
+  height: 100px;
+  border-radius: 20px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: bounce 4s infinite linear;
+}
+.heartsDisplay{
+  background-image: url(../images/3heart.png);
+  background-size: contain;
+  background-position: center;
+  height: 50px;
+  width: 150px;
+  background-repeat: no-repeat;
+  animation: pulse 4s infinite linear;
+}
 
-
+.redButton{
+  background: none;
+  background-image: url(../images/startBtn.png);
+  background-size: contain;
+  background-position: center;
+  color: transparent;
+  width: 90px;
+  background-repeat: no-repeat;
+  height: 45px;
+  border: none;
+  cursor: pointer;
+}
+.soundButton{
+  border: none;
+  background: none;
+  background-image: url(../images/Sound.png);
+  background-size: contain;
+  background-position: center;
+  color: transparent;
+  background-repeat: no-repeat;
+  height: 45px;
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar {
   width: 10px;
@@ -95,11 +144,49 @@ body {
 ::-webkit-scrollbar-thumb {
   background: #1FFFFB;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(109, 210, 8);
 }
-
-/*  background-image: url(../images/blueAlien.png);
-  background-size: contain ;
-  */
+@keyframes bounce {
+  0% {
+  width: 100px;
+  height: 100px;
+  transform: rotate(5deg);
+  }
+  25% {
+    height: 90px;
+    width: 90px;
+    transform: rotate(15deg);
+  }
+  50% {
+  width: 110px;
+  height: 110px;
+  transform: rotate(-15deg);
+  } 75% {
+  width: 90px;
+  height: 90px;
+  transform: rotate(-45deg);
+  }
+  100% {
+  width: 100px;
+  height: 100px;
+  transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  0%{
+    width: 150px;
+  }
+  24%{
+    width: 125px;
+  }
+  50%{
+      width: 150px;
+  }
+  75%{
+    width: 125px;
+  }
+  100%{
+    width: 150px;
+  }
+}

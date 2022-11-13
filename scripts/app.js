@@ -11,6 +11,11 @@ const sound = document.querySelector(".soundBtn");
 const backgroundSound = document.querySelector(".backgroundSound")
 const pew = document.querySelector(".pewPew")
 const scoreDisplay = document.querySelector("#score-display");
+const linkGit = document.querySelector(".git")
+const heartCounter = document.querySelector(".hearts")
+const title = document.querySelector("h1")
+const pTag = document.querySelector(".pTag")
+const pScore = document.querySelector(".pScore")
 const cells = [];
 const width = 20;
 const gridCellCount = width * width;
@@ -18,7 +23,7 @@ const gridCellCount = width * width;
 const alienPosition = [
   4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 24, 25, 26, 27, 28, 29, 30, 31, 32,
   33, 34, 35, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 64, 65, 66, 67,
-  68, 69, 70, 71, 72, 73, 74, 75,
+  68, 69, 70, 71, 72, 73, 74, 75
 ];
 
 const respawning = [
@@ -26,7 +31,7 @@ const respawning = [
   68, 69, 70, 71, 72, 73, 74, 75
 ];
 
-
+let updatedLook = 0
 let score = 0
 let toPlay = true;
 let playerPosition = 389;
@@ -36,7 +41,7 @@ let interval;
 let secondInterval
 let missilePosition;
 let travelDistance = 19;
-const lifeCount = 3
+let lifeCount = 3
 
 
 function init() {
@@ -49,6 +54,7 @@ function init() {
 
 //todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
+  start.disabled = true;
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement("div");
     cell.setAttribute("data-index", i);
@@ -74,9 +80,20 @@ function backgroundMusic(){
 }
 //todo window prompt joke nad styling with classes
 function graphicalUpdate(event){
+  updatedLook += 1;
   graphics.style.display = "none"
   grid.classList.add("divBackGrd");
   body.classList.add("graphicalBody");
+  start.classList.add("redButton")
+  linkGit.classList.add("linkGit");
+  heartCounter.innerHTML = ""
+  heartCounter.classList.add("heartsDisplay")
+  title.textContent = "Defender!"
+  title.classList.add("title")
+  sound.classList.add("soundButton");
+  pTag.textContent = "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!"
+  pTag.classList.add("pStyle")
+  pScore.classList.add("pStyle")
 }
 function placePlayer(playerPosition) {
   cells[playerPosition].classList.add("player");
@@ -125,7 +142,6 @@ function playerShoot(event) {
     }
   }
 }
-//cells[missilePosition].classList.add("missile");
 function smokePoof(missilePosition) {
   cells[missilePosition].classList.add("smoke");
   setTimeout(() => {
@@ -214,4 +230,22 @@ function removeAlien(){
   for (let i = 0; i < alienPosition.length; i++) {
     cells[alienPosition[i]].classList.remove("alien");
   }
+}
+function alienShoots(){
+  console.log("add everything here")
+}
+function playerGetsShot(){
+  console.log("rip")
+  lifeCount = 2
+  heartCounter.style.backgroundImage = "url(../images/2heart.png)";
+  lifeCount = 1
+  heartCounter.style.backgroundImage = "url(../images/lastHeart.png)";
+}
+
+
+function endGame() {
+  clearInterval(secondInterval);
+  removeAlien();
+  alert(score);
+  start.disabled = false;
 }
