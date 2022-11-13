@@ -187,7 +187,11 @@ body {
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-
+.blownUp{
+    background-image: url(../images/explode.png);
+  background-size: contain ;
+  background-repeat: no-repeat;
+}
 @keyframes bounce {
   0% {
   width: 100px;

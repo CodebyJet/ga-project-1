@@ -316,15 +316,15 @@ function endGame() {
     score = 0
     scoreDisplay.innerHTML = score;
   }, 250);
-  highScoreDisplay.textContent = JSON.toString(highscores);
+  highScoreDisplay.textContent = JSON.stringify(highscores);
   heartCounter.style.backgroundImage = "";
   clearInterval(missileInterval);
   clearInterval(alienInterval)
   start.disabled = false;
-  alienPosition.splice(0, alienPosition.length);
-  respawning.forEach((spawn) => alienPosition.push(spawn));
   removePlayer(playerPosition)
   removeAlien(alienPosition)
+  alienPosition.splice(0, alienPosition.length);
+  respawning.forEach((spawn) => alienPosition.push(spawn));
 }
 const highscores = []
 
