@@ -19,7 +19,7 @@ body {
 }
 .title{
   font-family: 'Press Start 2P', cursive;
-  color: #cbffdb;
+  color: #81fca6;
   text-decoration: underline;
   font-style: italic;
   font-size: 4rem;
@@ -37,7 +37,7 @@ body {
 }
 .title span:first-child{
   animation: glitch 650ms infinite;
-  /* color: red; */
+  color: #cbffdb;
   z-index: 1;
   clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
   transform: translate(0.15em, -0.025em);
@@ -45,7 +45,7 @@ body {
 .title span:last-child{
   animation: glitch 375ms infinite;
   z-index: 1;
-  /* color: greenyellow; */
+  color: #cbffdb;
   clip-path: polygon(0 60%, 110% 60%, 110% 100%, 0 110%);
   transform: translate(-0.15em, 0.025em);
 }
@@ -268,7 +268,15 @@ body {
   -0.025em -0.05em 0 #f56def;
   }
 }
-
+@media (prefers-reduced-motion: reduce){
+  .title{
+    animation: none;
+  }.heartsDisplay{
+    animation: none;
+  }.linkGit{
+    animation: none;
+  }
+}
 @media only screen and (max-width: 1250px){
   .pStyle{
   font-size: 15px;
