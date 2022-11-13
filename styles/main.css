@@ -1,6 +1,18 @@
 * {
   box-sizing: border-box;
 }
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(247, 73, 200);
+}
+::-webkit-scrollbar-thumb {
+  background: #1FFFFB;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(109, 210, 8);
+}
 body {
   height: 100vh;
   margin: 0;
@@ -22,6 +34,7 @@ body {
   color: #81fca6;
   text-decoration: underline;
   font-style: italic;
+  margin-top: 90px;
   font-size: 4rem;
   text-transform: uppercase;
   text-shadow: 
@@ -147,8 +160,7 @@ body {
   width: 150px;
   background-repeat: no-repeat;
   animation: pulse 4s infinite linear;
-}
-
+}jet
 .redButton{
   background: none;
   background-image: url(../images/startBtn.png);
@@ -175,18 +187,7 @@ body {
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-::-webkit-scrollbar {
-  width: 10px;
-}
-::-webkit-scrollbar-track {
-  background: rgb(247, 73, 200);
-}
-::-webkit-scrollbar-thumb {
-  background: #1FFFFB;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgb(109, 210, 8);
-}
+
 @keyframes bounce {
   0% {
   width: 100px;

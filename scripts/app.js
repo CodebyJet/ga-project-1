@@ -95,6 +95,7 @@ function graphicalUpdate(event){
     pTag.textContent = "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!"
     pTag.classList.add("pStyle")
     pScore.classList.add("pStyle")
+    highScoreDisplay.classList.add("pStyle")
   }
 }
 function placePlayer(playerPosition) {
@@ -308,7 +309,6 @@ function playerGetsShot(){
 }
 function endGame() {
   aliensCanShoot = false;
-  removeAlien(alienPosition)
   storeScore()
   grid.classList.add("gameOverScreen");
   setTimeout(() => {
@@ -316,7 +316,7 @@ function endGame() {
     score = 0
     scoreDisplay.innerHTML = score;
   }, 250);
-  highScoreDisplay.innerHTML = highscores
+  highScoreDisplay.textContent = JSON.toString(highscores);
   heartCounter.style.backgroundImage = "";
   clearInterval(missileInterval);
   clearInterval(alienInterval)
@@ -324,6 +324,7 @@ function endGame() {
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
   removePlayer(playerPosition)
+  removeAlien(alienPosition)
 }
 const highscores = []
 
