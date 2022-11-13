@@ -41,7 +41,6 @@ let goingRight = true;
 let movement = 1;
 let interval;
 let secondInterval;
-let thirdInterval;
 let forthInterval;
 let missilePosition;
 let laserPosition;
@@ -60,6 +59,7 @@ function init() {
 
 //todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
+  heartCounter.style.backgroundImage = "";
   grid.classList.remove("gameOverScreen");
   start.disabled = true;
   aliensCanShoot = true
@@ -108,9 +108,6 @@ function placePlayer(playerPosition) {
 function placeAlien(){
   for (let i = 0; i < alienPosition.length; i++){
     cells[alienPosition[i]].classList.add("alien")
-  }
-  if (aliensCanShoot){
-    thirdInterval = setInterval(alienShoots, 3000)
   }
 }
 //player controls
@@ -233,7 +230,8 @@ function moveAlien() {
   for (let i = 0; i < alienPosition.length; i++) {
     alienPosition[i] += movement
   }
-  placeAlien()
+  placeAlien();
+  alienShoots();
 }
 function removeAlien(){
   for (let i = 0; i < alienPosition.length; i++) {
@@ -246,10 +244,6 @@ function checkDefeat(){
     endGame()
   }
 }
-
-
-
-
 function alienShoots(){
   if (aliensCanShoot){
     laserPosition = alienPosition[Math. floor(Math.random() * alienPosition.length)];
@@ -294,12 +288,6 @@ function endLaser(){
   removeLaser();
   clearInterval(forthInterval);
 }
-
-
-
-
-
-
 function playerGetsShot(){
   if (lifeCount === 3){
     if (updatedLook === 1){
@@ -318,20 +306,22 @@ function playerGetsShot(){
       lives.textContent = lifeCount;
     }
   } else {
+    lifeCount = 3;
+    lives.textContent = lifeCount;
     endGame()
   }
 }
 function endGame() {
-  aliensCanShoot = false
+  aliensCanShoot = false;
   grid.classList.add("gameOverScreen");
-  lifeCount = 3
   setTimeout(() => {
     alert(`You did your best cadet! We managed to evacuate ${score} people`);
     score = 0
     scoreDisplay.innerHTML = score;
   }, 250);
-  clearInterval(secondInterval);
+  clearInterval(interval)
+  clearInterval(secondInterval)
+  start.disabled = false;
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
-  start.disabled = false;
 }
