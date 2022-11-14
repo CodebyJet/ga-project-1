@@ -300,6 +300,11 @@ p span{
     animation: none;
   }
 }
+@media only screen and (max-height: 800px) {
+  body{
+    padding-top: 20vh;
+  }
+}
 @media only screen and (max-width: 1250px){
   .pStyle{
   font-size: 15px;
