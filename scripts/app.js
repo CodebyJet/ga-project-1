@@ -402,23 +402,21 @@ function storeScore() {
   }
 }
 function displayScores() {
-  setTimeout(() => {
-    alert(`You did your best Cadet! We managed to evacuate ${score} people`);
-    storeScore();
-    const highScores = localStorage.getItem("highscores"); // this returns a string
-    const highScoresAsObject = JSON.parse(highScores); // transform it into an array
-    start.disabled = false;
-    const sorted = highScoresAsObject.sort((a, b) => b.score - a.score);
-    const highScoreElements = sorted.map(
-      (player) => `<li>${player.playerName}: ${player.score}</li>`
-    );
-    highScoreDisplay.innerHTML = `<ul>${highScoreElements.join("")}</ul>`;
-    scoreDisplay.innerHTML = score;
-    score = 0;
-  }, 1000);
+  alert(`You did your best Cadet! We managed to evacuate ${score} people`);
+  storeScore();
+  const highScores = localStorage.getItem("highscores"); // this returns a string
+  const highScoresAsObject = JSON.parse(highScores); // transform it into an array
+  const sorted = highScoresAsObject.sort((a, b) => b.score - a.score);
+  const highScoreElements = sorted.map(
+    (player) => `<li>${player.playerName}: ${player.score}</li>`
+  );
+  highScoreDisplay.innerHTML = `<ul>${highScoreElements.join("")}</ul>`;
+  scoreDisplay.innerHTML = score;
+  score = 0;
 }
 function resetStats() {
   aliensCanShoot = false;
+  start.disabled = false;
   heartCounter.style.backgroundImage = "";
   clearInterval(missileInterval);
   clearInterval(alienInterval);
