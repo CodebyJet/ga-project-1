@@ -233,7 +233,7 @@ function checkIfHit() {
     endMissile();
   }
 }
-//todo add a boss? gamescaling > 200 spawn boss, then end game?
+//todo add a boss? gamescaling > 300 spawn boss, then end game?
 function checkRespawn() {
   if (alienPosition.length === 0) {
     gameScaling = gameScaling - 100
