@@ -17,7 +17,6 @@ body {
   height: 100vh;
   margin: 0;
   display: flex;
-  margin-top: 20px;
   color: limegreen;
   flex-direction: column;
   justify-content: center;
@@ -35,7 +34,7 @@ body {
   color: #8ffdb0;
   text-decoration: underline;
   font-style: italic;
-  margin-top: 90px;
+  margin-top: 120px;
   font-size: 4rem;
   text-transform: uppercase;
   text-shadow: 
