@@ -356,6 +356,11 @@ p span{
     font-size: 3rem;
   }
 }
+@media only screen and (max-width: 400px)  {
+    .title{
+    font-size: 2rem;
+  }
+}
 @media only screen and (max-width: 500px){
   .grid{
   height: 300px;
