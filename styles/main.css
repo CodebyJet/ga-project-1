@@ -31,7 +31,7 @@ body {
 }
 .title{
   font-family: 'Press Start 2P', cursive;
-  color: #81fca6;
+  color: #8ffdb0;
   text-decoration: underline;
   font-style: italic;
   margin-top: 90px;
@@ -187,14 +187,13 @@ body {
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-
-.scoreWrap ul{
+.scoreWrap li{
   list-style: none;
-  color: #ff2638;
-  text-shadow: 1px 1px #ff9e9e;
+  display: none;
 }
-
-
+.scoreWrap li:nth-child(-n+5){
+  display: list-item;
+}
 /* @keyframes bounce {
   0% {
   width: 100px;

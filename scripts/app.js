@@ -303,6 +303,8 @@ function playerGetsShot() {
       lives.textContent = lifeCount;
     }
   } else {
+    lifeCount = 0;
+    lives.textContent = lifeCount;
     endGame();
   }
 }
