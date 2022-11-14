@@ -303,36 +303,33 @@ function playerGetsShot(){
     endGame()
   }
 }
-
-
 function endGame() {
-  storeScore()
+
   grid.classList.add("gameOverScreen");
   displayScores()
-  highScoreDisplay.textContent = `${highscores.playerName} ${highscores.score}`
   resetStats()
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
 }
 const highscores = []
-
 function storeScore(){
-  let playerName = prompt("Whats your name Space Cadet?")
+  const playerName = prompt("Whats your name Space Cadet?")
   const newScore = { score, playerName }
   highscores.push(newScore),
   highscores.sort((a,b) => b.score - a.score)
   localStorage.setItem(score, playerName)
 }
-
 function displayScores(){
   setTimeout(() => {
     alert(`You did your best Cadet! We managed to evacuate ${score} people`);
     score = 0;
     scoreDisplay.innerHTML = score;
+    storeScore();
     start.disabled = false;
+    highScoreDisplay.textContent = `${highscores[0].playername}`;
+    console.log(highscores);
   }, 1000);
 }
-
 function resetStats(){
   aliensCanShoot = false;
   heartCounter.style.backgroundImage = "";
