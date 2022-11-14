@@ -187,12 +187,7 @@ body {
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-.blownUp{
-    background-image: url(../images/explode.png);
-  background-size: contain ;
-  background-repeat: no-repeat;
-}
-@keyframes bounce {
+/* @keyframes bounce {
   0% {
   width: 100px;
   height: 100px;
@@ -217,7 +212,7 @@ body {
   height: 100px;
   transform: rotate(360deg);
   }
-}
+} */
 @keyframes pulse {
   0%{
     width: 150px;
@@ -277,8 +272,6 @@ body {
   .title{
     animation: none;
   }.heartsDisplay{
-    animation: none;
-  }.linkGit{
     animation: none;
   }
 }

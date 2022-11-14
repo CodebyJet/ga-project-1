@@ -50,12 +50,9 @@ function init() {
   sound.addEventListener("click", backgroundMusic);
   graphics.addEventListener("click", graphicalUpdate)
 }
-
 //todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
-  grid.classList.remove("gameOverScreen");
-  start.disabled = true;
-  aliensCanShoot = true
+  enableGameStats()
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement("div");
     cell.setAttribute("data-index", i);
@@ -65,6 +62,13 @@ function createGrid() {
   placePlayer(playerPosition);
   placeAlien();
   alienInterval = setInterval(moveAlien, 500);
+}
+function enableGameStats(){
+  grid.classList.remove("gameOverScreen");
+  lifeCount = 3;
+  lives.textContent = lifeCount;
+  start.disabled = true;
+  aliensCanShoot = true;
 }
 function backgroundMusic(){
   if (toPlay){
@@ -78,7 +82,6 @@ function backgroundMusic(){
     toPlay = true
   }
 }
-//todo window prompt joke nad styling with classes
 function graphicalUpdate(event){
   const enable = confirm("Graphics?! In this economy?... Sure, if you slide me 5 bucks?")
   if (enable){
@@ -106,7 +109,6 @@ function placeAlien(){
     cells[alienPosition[i]].classList.add("alien")
   }
 }
-//player controls
 function movePlayer(event) {
   const x = playerPosition % width;
   const y = Math.floor(playerPosition / width);
@@ -129,11 +131,7 @@ function moveLeft() {
 function removePlayer(cellNumber) {
   cells[cellNumber].classList.remove("player");
 }
-
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
-// keeping ability to shoot tied to travel distant, now i just need to do it
-// so travel distance is reset more
-
 function playerShoot(event) {
   if (event.keyCode === 32) {
     event.preventDefault();
@@ -302,36 +300,44 @@ function playerGetsShot(){
       lives.textContent = lifeCount;
     }
   } else {
-    lifeCount = 3;
-    lives.textContent = lifeCount;
     endGame()
   }
 }
+
+
 function endGame() {
-  aliensCanShoot = false;
   storeScore()
   grid.classList.add("gameOverScreen");
-  setTimeout(() => {
-    alert(`You did your best Cadet! We managed to evacuate ${score} people`);
-    score = 0
-    scoreDisplay.innerHTML = score;
-  }, 250);
-  highScoreDisplay.textContent = JSON.stringify(highscores);
-  heartCounter.style.backgroundImage = "";
-  clearInterval(missileInterval);
-  clearInterval(alienInterval)
-  start.disabled = false;
-  removePlayer(playerPosition)
-  removeAlien(alienPosition)
+  displayScores()
+  highScoreDisplay.textContent = `${highscores.playerName} ${highscores.score}`
+  resetStats()
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
 }
 const highscores = []
 
 function storeScore(){
-  const playerName = prompt("Whats your name Space Cadet?")
+  let playerName = prompt("Whats your name Space Cadet?")
   const newScore = { score, playerName }
   highscores.push(newScore),
   highscores.sort((a,b) => b.score - a.score)
   localStorage.setItem(score, playerName)
+}
+
+function displayScores(){
+  setTimeout(() => {
+    alert(`You did your best Cadet! We managed to evacuate ${score} people`);
+    score = 0;
+    scoreDisplay.innerHTML = score;
+    start.disabled = false;
+  }, 1000);
+}
+
+function resetStats(){
+  aliensCanShoot = false;
+  heartCounter.style.backgroundImage = "";
+  clearInterval(missileInterval);
+  clearInterval(alienInterval);
+  removeAlien(alienPosition);
+  removePlayer(playerPosition);
 }
