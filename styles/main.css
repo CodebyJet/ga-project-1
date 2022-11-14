@@ -187,12 +187,14 @@ body {
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-.scoreWrap{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  font-size: x-small;
+
+.scoreWrap ul{
+  list-style: none;
+  color: #ff2638;
+  text-shadow: 1px 1px #ff9e9e;
 }
+
+
 /* @keyframes bounce {
   0% {
   width: 100px;
