@@ -64,7 +64,11 @@ function createGrid() {
   alienInterval = setInterval(moveAlien, gameScaling);
 }
 function enableGameStats() {
-  grid.classList.remove("gameOverScreen");
+  if (updatedLook === 1){
+    grid.classList.remove("gameOverScreen");
+  } else {
+    grid.classList.remove("gameOverSad");
+  }
   lifeCount = 3;
   lives.textContent = lifeCount;
   start.disabled = true;
@@ -374,7 +378,11 @@ function playerGetsShot() {
   }
 }
 function endGame() {
-  grid.classList.add("gameOverScreen");
+  if (updatedLook === 1){
+    grid.classList.add("gameOverScreen");
+  } else {
+    grid.classList.add("gameOverSad");
+  }
   displayScores();
   resetStats();
   alienPosition.splice(0, alienPosition.length);
