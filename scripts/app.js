@@ -64,10 +64,9 @@ function createGrid() {
   alienInterval = setInterval(moveAlien, gameScaling);
 }
 function enableGameStats() {
+  grid.classList.remove("gameOverSad");
   if (updatedLook === 1){
     grid.classList.remove("gameOverScreen");
-  } else {
-    grid.classList.remove("gameOverSad");
   }
   lifeCount = 3;
   lives.textContent = lifeCount;
