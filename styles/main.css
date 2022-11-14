@@ -68,6 +68,9 @@ body {
   max-width: 400px;
   text-shadow: 0px 4px black;
 }
+p span{
+  color: rgb(222, 38, 38);
+}
 .gameDisplay{
   display: flex;
 }
@@ -122,6 +125,21 @@ body {
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
+}
+.invader{
+  background-color: red;
+}
+.blockShip{
+  background-color: green;
+}
+.rocket{
+  background-color: yellow;
+}
+.greyMist{
+  background-color: gray;
+}
+.blockLaser{
+  background-color: blue;
 }
 .divBackGrd{
   background-image: url(../images/pixelBckGrd.jpg);

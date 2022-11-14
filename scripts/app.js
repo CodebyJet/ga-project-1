@@ -41,6 +41,8 @@ let travelDistance = 9;
 let lifeCount = 3;
 let aliensCanShoot = true;
 
+let gameScaling = 1000
+
 function init() {
   window.addEventListener("keydown", movePlayer);
   window.addEventListener("keydown", playerShoot);
@@ -59,7 +61,7 @@ function createGrid() {
   }
   placePlayer(playerPosition);
   placeAlien();
-  alienInterval = setInterval(moveAlien, 500);
+  alienInterval = setInterval(moveAlien, gameScaling);
 }
 function enableGameStats() {
   grid.classList.remove("gameOverScreen");
@@ -95,19 +97,29 @@ function graphicalUpdate(event) {
     heartCounter.classList.add("heartsDisplay");
     title.classList.add("title");
     sound.classList.add("soundButton");
-    pTag.textContent =
-      "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!";
+    pTag.innerHTML =
+      "Careful Space Cadet! You are humanities last chance at survival! Hold them off as long as you can, while we evacuate the planet! The <span>more you kill </span>, <span>the quicker they come!</span> Use the arrow keys to move, space to shoot. I will reload your gun as fast as I can! God speed Cadet!";
     pTag.classList.add("pStyle");
     pScore.classList.add("pStyle");
     highScoreDisplay.classList.add("pStyle");
   }
 }
 function placePlayer(playerPosition) {
-  cells[playerPosition].classList.add("player");
+  if (updatedLook === 1){
+    cells[playerPosition].classList.add("player");
+  } else {
+    cells[playerPosition].classList.add("blockShip");
+  }
 }
 function placeAlien() {
-  for (let i = 0; i < alienPosition.length; i++) {
-    cells[alienPosition[i]].classList.add("alien");
+  if (updatedLook === 1){
+    for (let i = 0; i < alienPosition.length; i++) {
+      cells[alienPosition[i]].classList.add("alien");
+    }
+  } else {
+    for (let i = 0; i < alienPosition.length; i++) {
+      cells[alienPosition[i]].classList.add("invader");
+    }
   }
 }
 function movePlayer(event) {
@@ -130,8 +142,12 @@ function moveLeft() {
   placePlayer(playerPosition);
 }
 function removePlayer(cellNumber) {
-  cells[cellNumber].classList.remove("player");
+  cells[cellNumber].classList.remove("blockShip");
+  if (updatedLook === 1){
+    cells[cellNumber].classList.remove("player");
+  } 
 }
+
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
 function playerShoot(event) {
   if (event.keyCode === 32) {
@@ -145,16 +161,30 @@ function playerShoot(event) {
   }
 }
 function smokePoof(missilePosition) {
-  cells[missilePosition].classList.add("smoke");
-  setTimeout(() => {
-    cells[missilePosition].classList.remove("smoke");
-  }, 250);
+  if (updatedLook === 1){
+    cells[missilePosition].classList.add("smoke");
+    setTimeout(() => {
+      cells[missilePosition].classList.remove("smoke");
+    }, 250);
+  } else {
+    cells[missilePosition].classList.add("greyMist");
+    setTimeout(() => {
+      cells[missilePosition].classList.remove("greyMist");
+    }, 250);
+  }
 }
 function removeMissile(cellNumber) {
-  cells[missilePosition].classList.remove("missile");
+  cells[missilePosition].classList.remove("rocket");
+  if (updatedLook === 1){
+    cells[missilePosition].classList.remove("missile");
+  }
 }
 function addMissile(cellNumber) {
-  cells[missilePosition].classList.add("missile");
+  if (updatedLook === 1){
+    cells[missilePosition].classList.add("missile");
+  } else {
+    cells[missilePosition].classList.add("rocket");
+  }
 }
 function startMissile() {
   missileInterval = setInterval(missileTravel, 75);
@@ -178,11 +208,24 @@ function endMissile() {
   removeMissile();
 }
 function checkIfHit() {
-  if (cells[missilePosition].classList.contains("alien")) {
+  if (updatedLook === 1){
+    if (cells[missilePosition].classList.contains("alien")) {
+      scoreUp();
+      for (let i = 0; i < alienPosition.length; i++) {
+        if (alienPosition[i] === missilePosition) {
+          cells[alienPosition[i]].classList.remove("alien");
+          alienPosition.splice(i, 1);
+          checkRespawn();
+        }
+      }
+      endMissile();
+    }
+  }
+  if (cells[missilePosition].classList.contains("invader")) {
     scoreUp();
     for (let i = 0; i < alienPosition.length; i++) {
       if (alienPosition[i] === missilePosition) {
-        cells[alienPosition[i]].classList.remove("alien");
+        cells[alienPosition[i]].classList.remove("invader");
         alienPosition.splice(i, 1);
         checkRespawn();
       }
@@ -190,12 +233,14 @@ function checkIfHit() {
     endMissile();
   }
 }
+//todo add a boss? gamescaling > 200 spawn boss, then end game?
 function checkRespawn() {
   if (alienPosition.length === 0) {
+    gameScaling = gameScaling - 100
     clearInterval(alienInterval);
     respawning.forEach((spawn) => alienPosition.push(spawn));
     placeAlien();
-    alienInterval = setInterval(moveAlien, 500);
+    alienInterval = setInterval(moveAlien, gameScaling);
   }
 }
 function scoreUp() {
@@ -231,7 +276,12 @@ function moveAlien() {
 }
 function removeAlien() {
   for (let i = 0; i < alienPosition.length; i++) {
-    cells[alienPosition[i]].classList.remove("alien");
+    cells[alienPosition[i]].classList.remove("invader");
+  }
+  if (updatedLook === 1){
+    for (let i = 0; i < alienPosition.length; i++) {
+      cells[alienPosition[i]].classList.remove("alien");
+    }
   }
 }
 function checkDefeat() {
@@ -243,8 +293,7 @@ function checkDefeat() {
 function alienShoots() {
   if (aliensCanShoot) {
     laserPosition =
-      alienPosition[Math.floor(Math.random() * alienPosition.length)] + 10;
-    cells[laserPosition].classList.add("laser");
+      alienPosition[Math.floor(Math.random() * alienPosition.length)];
     startLaser();
     pew.play();
     aliensCanShoot = false;
@@ -254,10 +303,17 @@ function startLaser() {
   laserInterval = setInterval(laserTravel, 250);
 }
 function addLaser() {
-  cells[laserPosition].classList.add("laser");
+  if (updatedLook === 1){
+    cells[laserPosition].classList.add("laser");
+  } else {
+    cells[laserPosition].classList.add("blockLaser");
+  }
 }
 function removeLaser(cellNumber) {
-  cells[laserPosition].classList.remove("laser");
+  cells[laserPosition].classList.remove("blockLaser");
+  if (updatedLook === 1){
+    cells[laserPosition].classList.remove("laser");
+  }
 }
 function laserTravel() {
   if (laserPosition < 90) {
@@ -274,11 +330,20 @@ function laserTravel() {
   }
 }
 function checkForPlayer() {
-  if (cells[laserPosition].classList.contains("player")) {
-    playerGetsShot();
-    removeLaser();
-    endLaser();
-    aliensCanShoot = true;
+  if (updatedLook === 1){
+    if (cells[laserPosition].classList.contains("player")) {
+      playerGetsShot();
+      removeLaser();
+      endLaser();
+      aliensCanShoot = true;
+    }
+  } else {
+    if (cells[laserPosition].classList.contains("blockShip")) {
+      playerGetsShot();
+      removeLaser();
+      endLaser();
+      aliensCanShoot = true;
+    }
   }
 }
 function endLaser() {
