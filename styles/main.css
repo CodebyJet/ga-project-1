@@ -244,6 +244,17 @@ p span{
 .scoreWrap li:nth-child(-n+5){
   display: list-item;
 }
+
+.shot{
+  animation: shake 0.35s;
+}
+@keyframes shake{
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
+}
 /* @keyframes bounce {
   0% {
   width: 100px;
@@ -281,7 +292,6 @@ p span{
     right: 15px
   }
 }
-
 @keyframes pulse {
   0%{
     width: 150px;

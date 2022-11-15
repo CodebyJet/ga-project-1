@@ -386,6 +386,7 @@ function endLaser() {
   clearInterval(laserInterval);
 }
 function playerGetsShot() {
+  gridWrapper.classList.add("shot");
   if (lifeCount === 3) {
     if (updatedLook === 1) {
       heartCounter.style.backgroundImage = "url(../images/2heart.png)";
@@ -407,6 +408,7 @@ function playerGetsShot() {
     lives.textContent = lifeCount;
     endGame();
   }
+  setTimeout(()=> {gridWrapper.classList.remove("shot")}, 1000);
 }
 //todo MotherShip
 function placeMotherShip() {
