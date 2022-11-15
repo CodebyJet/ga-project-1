@@ -24,20 +24,21 @@ const width = 10;
 const gridCellCount = width * width;
 
 let playerPosition = 95;
+let motherPosition = 14
 const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
-const motherPosition = 24
-const guardsPosition = [4, 21, 26, 44]
+const guardsPosition = [3, 5, 23, 25]
 
 let missileInterval;
 let alienInterval;
 let laserInterval;
+let guardInterval;
 
 let lifeCount = 3;
 let score = 0;
 let toPlay = true;
 let updatedLook = 0;
-let gameScaling = 1000
+let gameScaling = 1000;
 
 let aliensCanShoot = true;
 let goingRight = true;
@@ -240,6 +241,17 @@ function checkIfHit() {
     }
     endMissile();
   }
+  if (cells[missilePosition].classList.contains("blobMom") || (cells[missilePosition].classList.contains("motherShip"))){
+    score = score + 1000
+    removeMissile();
+    endMissile();
+    alternateEnding();
+  }
+  if (cells[missilePosition].classList.contains("guard") || cells[missilePosition].classList.contains("blockGuard")) {
+    removeMissile();
+    endMissile();
+  }
+
 }
 //todo add a boss? gamescaling > 300 spawn boss, then end game?
 function checkRespawn() {
@@ -247,10 +259,10 @@ function checkRespawn() {
     clearInterval(alienInterval);
     gameScaling = gameScaling - 100
     if (gameScaling < 500){
-      alert("Currently thats all I have, making a mothership to spawn now with some guards. Thanks for playing")
-      endGame()
-      // placeMotherShip()
-      // placeGuards()
+      aliensCanShoot = false;
+      placeMotherShip()
+      placeGuards()
+      guardInterval = setInterval(moveGuards, 500)
     } else {
       respawning.forEach((spawn) => alienPosition.push(spawn));
       placeAlien();
@@ -262,23 +274,6 @@ function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
 }
-function placeMotherShip(){
-  if (updatedLook === 1) {
-    cells[motherPosition].classList.add("motherShip");
-  } else {
-    cells[motherPosition].classList.add("blobMom");
-  }
-}
-function placeGuards(){
-  if (updatedLook === 1) {
-    cells[motherPosition].classList.add("guards");
-  } else {
-    cells[motherPosition].classList.add("blockGuards");
-  }
-}
-
-
-
 
 //todo re-write moveAlien to something nicer to look at
 function moveAlien() {
@@ -324,6 +319,9 @@ function removeAlien() {
 function checkDefeat() {
   const finishLine = [90, 91, 92, 93, 94, 95, 96, 97, 98, 99];
   if (alienPosition.some((value) => finishLine.includes(value))) {
+    endGame();
+  }
+  if (guardsPosition.some((value) => finishLine.includes(value))) {
     endGame();
   }
 }
@@ -411,16 +409,104 @@ function playerGetsShot() {
     endGame();
   }
 }
+//todo MotherShip
+
+function placeMotherShip() {
+  if (updatedLook === 1) {
+    cells[motherPosition].classList.add("motherShip");
+  } else {
+    cells[motherPosition].classList.add("blobMom");
+  }
+}
+function placeGuards() {
+  if (updatedLook === 1) {
+    for (let i = 0; i < guardsPosition.length; i++) {
+      cells[guardsPosition[i]].classList.add("guard");
+    }
+  } else {
+    for (let i = 0; i < guardsPosition.length; i++) {
+      cells[guardsPosition[i]].classList.add("blockGuard");
+    }
+  }
+}
+function moveGuards() {
+  const leftSide = guardsPosition[0] % width === 0;
+  removeGuard();
+  removeMom()
+  checkDefeat();
+  if (goingRight && guardsPosition.some((value) => value % width === width - 1)) {
+    for (let i = 0; i < guardsPosition.length; i++) {
+      guardsPosition[i] += width + 1;
+    }
+    movement = -1;
+    goingRight = false;
+    motherPosition += width + 1
+  }
+  if (leftSide && !goingRight) {
+    for (let i = 0; i < guardsPosition.length; i++) {
+      guardsPosition[i] += width - 1;
+    }
+    movement = 1;
+    goingRight = true;
+    motherPosition += width - 1
+  }
+  motherPosition += movement
+  for (let i = 0; i < guardsPosition.length; i++) {
+    guardsPosition[i] += movement;
+  }
+  placeGuards();
+  placeMotherShip()
+  alienShoots();
+}
+function removeGuard() {
+  for (let i = 0; i < guardsPosition.length; i++) {
+    cells[guardsPosition[i]].classList.remove("blockGuard");
+  }
+  if (updatedLook === 1) {
+    for (let i = 0; i < guardsPosition.length; i++) {
+      cells[guardsPosition[i]].classList.remove("guard");
+    }
+  }
+}
+function removeMom(){
+  cells[motherPosition].classList.remove("blobMom");
+  if (updatedLook === 1) {
+    cells[motherPosition].classList.remove("motherShip");
+  } 
+}
+function alternateEnding(){
+  alert("Thanks to your bravery Cadet, we managed to evacuate the planet in time!")
+  resetStats()
+  displayScores()
+  alienPosition.splice(0, alienPosition.length);
+  respawning.forEach((spawn) => alienPosition.push(spawn));
+}
+
+
+
 function endGame() {
   if (updatedLook === 1){
     grid.classList.add("gameOverScreen");
   } else {
     grid.classList.add("gameOverSad");
   }
+  alert(`You did your best Cadet! We managed to evacuate ${score} people`);
   displayScores();
   resetStats();
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
+}
+function displayScores() {
+  storeScore();
+  const highScores = localStorage.getItem("highscores"); // this returns a string
+  const highScoresAsObject = JSON.parse(highScores); // transform it into an array
+  const sorted = highScoresAsObject.sort((a, b) => b.score - a.score);
+  const highScoreElements = sorted.map(
+    (player) => `<li>${player.playerName}: ${player.score}</li>`
+  );
+  highScoreDisplay.innerHTML = `<ul>${highScoreElements.join("")}</ul>`;
+  scoreDisplay.innerHTML = score;
+  score = 0;
 }
 function storeScore() {
   const playerName = prompt("Whats your name Space Cadet?");
@@ -436,25 +522,17 @@ function storeScore() {
     localStorage.setItem("highscores", JSON.stringify(scoresFromStorage));
   }
 }
-function displayScores() {
-  alert(`You did your best Cadet! We managed to evacuate ${score} people`);
-  storeScore();
-  const highScores = localStorage.getItem("highscores"); // this returns a string
-  const highScoresAsObject = JSON.parse(highScores); // transform it into an array
-  const sorted = highScoresAsObject.sort((a, b) => b.score - a.score);
-  const highScoreElements = sorted.map(
-    (player) => `<li>${player.playerName}: ${player.score}</li>`
-  );
-  highScoreDisplay.innerHTML = `<ul>${highScoreElements.join("")}</ul>`;
-  scoreDisplay.innerHTML = score;
-  score = 0;
-}
 function resetStats() {
+  gameScaling = 1000;
   aliensCanShoot = false;
   start.disabled = false;
   heartCounter.style.backgroundImage = "";
   clearInterval(missileInterval);
   clearInterval(alienInterval);
+  clearInterval(guardInterval);
+  clearInterval(laserInterval);
   removeAlien(alienPosition);
   removePlayer(playerPosition);
+  removeGuard()
+  removeMom()
 }

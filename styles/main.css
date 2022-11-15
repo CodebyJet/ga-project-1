@@ -121,7 +121,6 @@ p span{
   background-repeat: no-repeat;
 }
 .alien{
-  /* background-color: #1FFFFB; */
   background-image: url(../images/pinkAlien.png);
   background-position: center;
   background-size: contain;
@@ -208,7 +207,24 @@ p span{
 .gameOverSad{
   background-image: url(../images/gameOverSad.jpg);
 }
-
+.blobMom{
+  background-color: magenta;
+}
+.blockGuard{
+  background-color: teal;
+}
+.motherShip{
+  background-image: url(../images/mothership.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.guard{
+  background-image: url(../images/crystalGuard.png);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 .scoreWrap li{
   list-style: none;
