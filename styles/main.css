@@ -234,11 +234,9 @@ p span{
   background-image: url(../images/VictoryPizzaParty.jpg);
 }
 .VictoryScreen{
-  
+  background-image: url(../images/victoryScreen.jpg);
+  background-size: cover;
 }
-
-
-
 .scoreWrap li{
   list-style: none;
   display: none;
