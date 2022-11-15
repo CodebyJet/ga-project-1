@@ -71,6 +71,7 @@ function enableGameStats() {
   if (updatedLook === 1){
     grid.classList.remove("gameOverScreen");
   }
+  travelDistance = 9;
   lifeCount = 3;
   lives.textContent = lifeCount;
   start.disabled = true;
@@ -476,8 +477,8 @@ function removeMom(){
 }
 function alternateEnding(){
   alert("Thanks to your bravery Cadet, we managed to evacuate the planet in time!")
-  resetStats()
   displayScores()
+  resetStats()
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
 }
