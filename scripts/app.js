@@ -68,9 +68,9 @@ function createGrid() {
 }
 function enableGameStats() {
   grid.classList.remove("gameOverSad");
-  if (updatedLook === 1){
-    grid.classList.remove("gameOverScreen");
-  }
+  grid.classList.remove("gameOverScreen");
+  grid.classList.remove("pizzaParty");
+  grid.classList.remove("VictoryScreen");
   travelDistance = 9;
   lifeCount = 3;
   lives.textContent = lifeCount;
@@ -155,7 +155,6 @@ function removePlayer(cellNumber) {
     cells[cellNumber].classList.remove("player");
   } 
 }
-
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
 function playerShoot(event) {
   if (event.keyCode === 32) {
@@ -275,7 +274,6 @@ function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
 }
-
 //todo re-write moveAlien to something nicer to look at
 function moveAlien() {
   const leftSide = alienPosition[0] % width === 0;
@@ -411,7 +409,6 @@ function playerGetsShot() {
   }
 }
 //todo MotherShip
-
 function placeMotherShip() {
   if (updatedLook === 1) {
     cells[motherPosition].classList.add("motherShip");
@@ -476,15 +473,17 @@ function removeMom(){
   } 
 }
 function alternateEnding(){
+  if (updatedLook === 1) {
+    grid.classList.add("VictoryScreen");
+  } else {
+    grid.classList.add("pizzaParty");
+  }
   alert("Thanks to your bravery Cadet, we managed to evacuate the planet in time!")
   displayScores()
   resetStats()
   alienPosition.splice(0, alienPosition.length);
   respawning.forEach((spawn) => alienPosition.push(spawn));
 }
-
-
-
 function endGame() {
   if (updatedLook === 1){
     grid.classList.add("gameOverScreen");

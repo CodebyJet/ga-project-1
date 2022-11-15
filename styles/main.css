@@ -22,6 +22,11 @@ body {
   justify-content: center;
   align-items: center;
 }
+.graphicsBtn{
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+}
 .graphicalBody{
   background-image: url(../images/spaceBackground.jpg);
   background-position: center;
@@ -225,6 +230,14 @@ p span{
   background-size: contain;
   background-repeat: no-repeat;
 }
+.pizzaParty{
+  background-image: url(../images/VictoryPizzaParty.jpg);
+}
+.VictoryScreen{
+  
+}
+
+
 
 .scoreWrap li{
   list-style: none;
@@ -354,7 +367,7 @@ p span{
   }
   .pStyle{
     font-size: 10px;
-  }.
+  }
 }
 @media only screen and (max-width: 850px){
   .gameDisplay{
