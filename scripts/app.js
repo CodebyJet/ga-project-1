@@ -408,7 +408,9 @@ function playerGetsShot() {
     lives.textContent = lifeCount;
     endGame();
   }
-  setTimeout(()=> {gridWrapper.classList.remove("shot")}, 1000);
+  setTimeout(()=> {
+    gridWrapper.classList.remove("shot")
+  }, 1000);
 }
 //todo MotherShip
 function placeMotherShip() {
