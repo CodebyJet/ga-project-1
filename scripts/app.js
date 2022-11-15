@@ -23,24 +23,28 @@ const cells = [];
 const width = 10;
 const gridCellCount = width * width;
 
+let playerPosition = 95;
 const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
+const motherPosition = 24
+const guardsPosition = [4, 21, 26, 44]
 
-let updatedLook = 0;
-let score = 0;
-let toPlay = true;
-let playerPosition = 95;
-let goingRight = true;
-let movement = 1;
 let missileInterval;
 let alienInterval;
 let laserInterval;
+
+let lifeCount = 3;
+let score = 0;
+let toPlay = true;
+let updatedLook = 0;
+let gameScaling = 1000
+
+let aliensCanShoot = true;
+let goingRight = true;
+let movement = 1;
 let missilePosition;
 let laserPosition;
 let travelDistance = 9;
-let lifeCount = 3;
-let aliensCanShoot = true;
-let gameScaling = 1000
 
 function init() {
   window.addEventListener("keydown", movePlayer);
@@ -240,17 +244,42 @@ function checkIfHit() {
 //todo add a boss? gamescaling > 300 spawn boss, then end game?
 function checkRespawn() {
   if (alienPosition.length === 0) {
-    gameScaling = gameScaling - 100
     clearInterval(alienInterval);
-    respawning.forEach((spawn) => alienPosition.push(spawn));
-    placeAlien();
-    alienInterval = setInterval(moveAlien, gameScaling);
+    gameScaling = gameScaling - 100
+    if (gameScaling < 500){
+      alert("Currently thats all I have, making a mothership to spawn now with some guards. Thanks for playing")
+      endGame()
+      // placeMotherShip()
+      // placeGuards()
+    } else {
+      respawning.forEach((spawn) => alienPosition.push(spawn));
+      placeAlien();
+      alienInterval = setInterval(moveAlien, gameScaling);
+    }
   }
 }
 function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
 }
+function placeMotherShip(){
+  if (updatedLook === 1) {
+    cells[motherPosition].classList.add("motherShip");
+  } else {
+    cells[motherPosition].classList.add("blobMom");
+  }
+}
+function placeGuards(){
+  if (updatedLook === 1) {
+    cells[motherPosition].classList.add("guards");
+  } else {
+    cells[motherPosition].classList.add("blockGuards");
+  }
+}
+
+
+
+
 //todo re-write moveAlien to something nicer to look at
 function moveAlien() {
   const leftSide = alienPosition[0] % width === 0;
