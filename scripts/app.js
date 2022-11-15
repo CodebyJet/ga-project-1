@@ -10,6 +10,7 @@ const graphics = document.querySelector(".graphicsBtn");
 const sound = document.querySelector(".soundBtn");
 const backgroundSound = document.querySelector(".backgroundSound");
 const pew = document.querySelector(".pewPew");
+const blaster = document.querySelector(".blaster")
 const scoreDisplay = document.querySelector("#score-display");
 const linkGit = document.querySelector(".git");
 const heartCounter = document.querySelector(".hearts");
@@ -23,7 +24,6 @@ const width = 10;
 const gridCellCount = width * width;
 
 const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
-
 const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 
 let updatedLook = 0;
@@ -40,7 +40,6 @@ let laserPosition;
 let travelDistance = 9;
 let lifeCount = 3;
 let aliensCanShoot = true;
-
 let gameScaling = 1000
 
 function init() {
@@ -50,7 +49,6 @@ function init() {
   sound.addEventListener("click", backgroundMusic);
   graphics.addEventListener("click", graphicalUpdate);
 }
-//todo function startGame(){} playerplace, alienplace and move
 function createGrid() {
   enableGameStats();
   for (let i = 0; i < gridCellCount; i++) {
@@ -80,6 +78,7 @@ function backgroundMusic() {
     backgroundSound.loop;
     toPlay = false;
     pew.src = "./sound/pew-pew.mp3";
+    blaster.src = "./sound/blaster.mp3";
   } else {
     backgroundSound.pause();
     toPlay = true;
@@ -159,7 +158,9 @@ function playerShoot(event) {
       missilePosition = playerPosition - 10;
       smokePoof(missilePosition);
       startMissile();
-      pew.play();
+      if (toPlay === false){
+        pew.play();
+      }
     }
   }
 }
@@ -253,29 +254,33 @@ function scoreUp() {
 //todo re-write moveAlien to something nicer to look at
 function moveAlien() {
   const leftSide = alienPosition[0] % width === 0;
-  const rightSide =
-    alienPosition[alienPosition.length - 1] % width === width - 1;
   removeAlien();
   checkDefeat();
-  if (goingRight && rightSide) {
-    for (let i = 0; i < alienPosition.length; i++) {
-      alienPosition[i] += width + 1;
-      movement = -1;
-      goingRight = false;
-    }
+  if (goingRight && (alienPosition.some((value) => value  % width === width - 1))) {
+    moveDownRight();
   }
   if (leftSide && !goingRight) {
-    for (let i = 0; i < alienPosition.length; i++) {
-      alienPosition[i] += width - 1;
-      movement = 1;
-      goingRight = true;
-    }
+    moveDownLeft()
   }
   for (let i = 0; i < alienPosition.length; i++) {
     alienPosition[i] += movement;
   }
   placeAlien();
   alienShoots();
+}
+function moveDownRight(){
+  for (let i = 0; i < alienPosition.length; i++) {
+    alienPosition[i] += width + 1;
+    movement = -1;
+    goingRight = false;
+  }
+}
+function moveDownLeft(){
+  for (let i = 0; i < alienPosition.length; i++) {
+    alienPosition[i] += width - 1;
+    movement = 1;
+    goingRight = true;
+  }
 }
 function removeAlien() {
   for (let i = 0; i < alienPosition.length; i++) {
@@ -298,8 +303,10 @@ function alienShoots() {
     laserPosition =
       alienPosition[Math.floor(Math.random() * alienPosition.length)];
     startLaser();
-    pew.play();
     aliensCanShoot = false;
+    if (toPlay === false) {
+      blaster.play();
+    }
   }
 }
 function startLaser() {
@@ -323,7 +330,6 @@ function laserTravel() {
     removeLaser();
     laserPosition = laserPosition + 10;
     addLaser();
-
     checkForPlayer();
   } else {
     aliensCanShoot = true;

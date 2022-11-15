@@ -88,6 +88,7 @@ p span{
   /* height: 90vh; */
   display: flex;
   justify-content: center;
+  /* animation: shot 2s linear; */
 }
 .grid {
   align-items: center;
@@ -168,7 +169,6 @@ p span{
   border-radius: 20px;
   background-size: contain;
   background-repeat: no-repeat;
-  animation: bounce 4s infinite linear;
 }
 .heartsDisplay{
   background-image: url(../images/3heart.png);
@@ -243,6 +243,18 @@ p span{
   transform: rotate(360deg);
   }
 } */
+@keyframes shot {
+  0%{
+    wi: 5px;
+  }25%{
+    right:15px
+  }50%{
+    left: 15px;
+  }75%{
+    right: 15px
+  }
+}
+
 @keyframes pulse {
   0%{
     width: 150px;
