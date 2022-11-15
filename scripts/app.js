@@ -257,7 +257,7 @@ function checkIfHit() {
 function checkRespawn() {
   if (alienPosition.length === 0) {
     clearInterval(alienInterval);
-    gameScaling = gameScaling - 200
+    gameScaling = gameScaling - 100
     if (gameScaling < 500){
       aliensCanShoot = false;
       placeMotherShip()
@@ -502,8 +502,8 @@ function endGame() {
 }
 function displayScores() {
   storeScore();
-  const highScores = localStorage.getItem("highscores"); // this returns a string
-  const highScoresAsObject = JSON.parse(highScores); // transform it into an array
+  const highScores = localStorage.getItem("highscores");
+  const highScoresAsObject = JSON.parse(highScores);
   const sorted = highScoresAsObject.sort((a, b) => b.score - a.score);
   const highScoreElements = sorted.map(
     (player) => `<li>${player.playerName}: ${player.score}</li>`

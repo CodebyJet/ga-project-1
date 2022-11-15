@@ -1,6 +1,11 @@
 * {
   box-sizing: border-box;
 }
+:root{
+  --clr-neon: hs1(317 100% 54%)
+  --clr-bg: hs1(323 21% 16%)
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -23,9 +28,7 @@ body {
   align-items: center;
 }
 .graphicsBtn{
-  background-color: red;
-  color: white;
-  border-radius: 5px;
+  box-shadow: 0.25em 0.25em 0.5em red;
 }
 .graphicalBody{
   background-image: url(../images/spaceBackground.jpg);
