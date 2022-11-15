@@ -51,3 +51,10 @@ and started work on the leaderboard system
 rescaled the sizes down as the sprites didn't look the right size
 added styling and a joke graphics button and effects
 added music and fixed that the laser pew pews don't stop the music
+
+finished early
+Started doing the bonus things like the mothership and her guard, screen shakes when you get shot
+
+made a leaderboard
+
+reduced some of the animations to save load time
