@@ -257,7 +257,7 @@ function checkIfHit() {
 function checkRespawn() {
   if (alienPosition.length === 0) {
     clearInterval(alienInterval);
-    gameScaling = gameScaling - 100
+    gameScaling = gameScaling - 200
     if (gameScaling < 500){
       aliensCanShoot = false;
       placeMotherShip()
