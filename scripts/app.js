@@ -34,13 +34,12 @@ let alienInterval;
 let laserInterval;
 let guardInterval;
 
-
 let endlessMode = false
 let lifeCount = 3;
 let score = 0;
 let toPlay = true;
 let updatedLook = 0;
-let gameScaling = 500;
+let gameScaling = 1000;
 let momLife = 3;
 let aliensCanShoot = true;
 let goingRight = true;
@@ -158,8 +157,6 @@ function removePlayer(cellNumber) {
     cells[cellNumber].classList.remove("player");
   } 
 }
-
-
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
 function playerShoot(event) {
   if (event.keyCode === 32) {
@@ -267,7 +264,6 @@ function checkIfHit() {
   }
 
 }
-//todo add a boss? gamescaling > 300 spawn boss, then end game?
 function checkRespawn() {
   if (endlessMode === false){
     if (alienPosition.length === 0) {
@@ -295,7 +291,6 @@ function checkRespawn() {
     }
   }
 }
-
 function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
@@ -564,7 +559,6 @@ function resetStats() {
   removeGuard()
   removeMom()
 }
-
 function startEndlessMode(){
   removeMom()
   removeGuard()
