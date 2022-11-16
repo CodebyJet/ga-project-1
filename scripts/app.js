@@ -39,7 +39,7 @@ let score = 0;
 let toPlay = true;
 let updatedLook = 0;
 let gameScaling = 1000;
-
+let momLife = 3;
 let aliensCanShoot = true;
 let goingRight = true;
 let movement = 1;
@@ -73,6 +73,7 @@ function enableGameStats() {
   grid.classList.remove("VictoryScreen");
   travelDistance = 9;
   lifeCount = 3;
+  momLife = 3;
   lives.textContent = lifeCount;
   start.disabled = true;
   aliensCanShoot = true;
@@ -155,6 +156,8 @@ function removePlayer(cellNumber) {
     cells[cellNumber].classList.remove("player");
   } 
 }
+
+
 //ToDo rough beginning shoot - need to put the stopper on spam shoot
 function playerShoot(event) {
   if (event.keyCode === 32) {
@@ -246,9 +249,14 @@ function checkIfHit() {
     endMissile();
   }
   if (cells[missilePosition].classList.contains("blobMom") || (cells[missilePosition].classList.contains("motherShip"))){
-    score = score + 1000
-    endMissile();
-    alternateEnding();
+    if (momLife <= 1){
+      score = score + 1000
+      endMissile();
+      alternateEnding();
+    } else {
+      momLife --;
+      endMissile();
+    }
   }
   if (cells[missilePosition].classList.contains("guard") || cells[missilePosition].classList.contains("blockGuard")) {
     endMissile();
