@@ -1,11 +1,6 @@
 * {
   box-sizing: border-box;
 }
-:root{
-  --clr-neon: hs1(317 100% 54%)
-  --clr-bg: hs1(323 21% 16%)
-}
-
 ::-webkit-scrollbar {
   width: 10px;
 }
@@ -122,7 +117,6 @@ p span{
   background-size: contain;
 }
 .laser{
-  /* background-color: blueviolet; */
   background-image: url(../images/laserBeam.png);
   background-position: center;
   background-size: contain;
@@ -145,6 +139,8 @@ p span{
 }
 .greyMist{
   background-color: gray;
+  opacity: 0.5;
+  border-radius: 0.15rem;
 }
 .blockLaser{
   background-color: blue;
@@ -168,6 +164,7 @@ p span{
   background-image: url(../images/smokePoof.png);
   background-size: contain ;
   background-repeat: no-repeat;
+  opacity: 0.5;
 }
 .linkGit{
   background-image: url(../images/astroLogo.jpg);
@@ -247,7 +244,6 @@ p span{
 .scoreWrap li:nth-child(-n+5){
   display: list-item;
 }
-
 .shot{
   animation: shake 0.35s;
 }

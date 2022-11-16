@@ -179,7 +179,7 @@ function smokePoof(missilePosition) {
     cells[missilePosition].classList.add("greyMist");
     setTimeout(() => {
       cells[missilePosition].classList.remove("greyMist");
-    }, 250);
+    }, 125);
   }
 }
 function removeMissile(cellNumber) {
@@ -217,6 +217,10 @@ function endMissile() {
   removeMissile();
 }
 function checkIfHit() {
+  if (missilePosition === laserPosition){
+    endMissile();
+    endLaser();
+  }
   if (updatedLook === 1){
     if (cells[missilePosition].classList.contains("alien")) {
       scoreUp();
@@ -243,12 +247,10 @@ function checkIfHit() {
   }
   if (cells[missilePosition].classList.contains("blobMom") || (cells[missilePosition].classList.contains("motherShip"))){
     score = score + 1000
-    removeMissile();
     endMissile();
     alternateEnding();
   }
   if (cells[missilePosition].classList.contains("guard") || cells[missilePosition].classList.contains("blockGuard")) {
-    removeMissile();
     endMissile();
   }
 
@@ -262,7 +264,7 @@ function checkRespawn() {
       aliensCanShoot = false;
       placeMotherShip()
       placeGuards()
-      guardInterval = setInterval(moveGuards, 500)
+      guardInterval = setInterval(moveGuards, 400)
     } else {
       respawning.forEach((spawn) => alienPosition.push(spawn));
       placeAlien();
@@ -358,31 +360,26 @@ function laserTravel() {
     addLaser();
     checkForPlayer();
   } else {
-    aliensCanShoot = true;
-    removeLaser();
     checkForPlayer();
     endLaser();
   }
 }
 function checkForPlayer() {
-  if (updatedLook === 1){
+  if (updatedLook === 1) {
     if (cells[laserPosition].classList.contains("player")) {
       playerGetsShot();
-      removeLaser();
       endLaser();
-      aliensCanShoot = true;
     }
   } else {
     if (cells[laserPosition].classList.contains("blockShip")) {
       playerGetsShot();
-      removeLaser();
       endLaser();
-      aliensCanShoot = true;
     }
   }
 }
 function endLaser() {
   removeLaser();
+  aliensCanShoot = true;
   clearInterval(laserInterval);
 }
 function playerGetsShot() {
