@@ -34,11 +34,13 @@ let alienInterval;
 let laserInterval;
 let guardInterval;
 
+
+let endlessMode = false
 let lifeCount = 3;
 let score = 0;
 let toPlay = true;
 let updatedLook = 0;
-let gameScaling = 1000;
+let gameScaling = 500;
 let momLife = 3;
 let aliensCanShoot = true;
 let goingRight = true;
@@ -252,6 +254,8 @@ function checkIfHit() {
     if (momLife <= 1){
       score = score + 1000
       endMissile();
+      removeGuard()
+      removeMom()
       alternateEnding();
     } else {
       momLife --;
@@ -265,21 +269,33 @@ function checkIfHit() {
 }
 //todo add a boss? gamescaling > 300 spawn boss, then end game?
 function checkRespawn() {
-  if (alienPosition.length === 0) {
-    clearInterval(alienInterval);
-    gameScaling = gameScaling - 100
-    if (gameScaling < 500){
-      aliensCanShoot = false;
-      placeMotherShip()
-      placeGuards()
-      guardInterval = setInterval(moveGuards, 400)
-    } else {
+  if (endlessMode === false){
+    if (alienPosition.length === 0) {
+      endLaser()
+      clearInterval(alienInterval);
+      gameScaling = gameScaling - 100
+      if (gameScaling < 500){
+        alert("Watch out! The Mothership is coming! You will have to shoot her at least three times to give us enough time to evacuate more people!")
+        aliensCanShoot = false;
+        placeMotherShip()
+        placeGuards()
+        guardInterval = setInterval(moveGuards, 400)
+      } else {
+        respawning.forEach((spawn) => alienPosition.push(spawn));
+        placeAlien();
+        alienInterval = setInterval(moveAlien, gameScaling);
+      }
+    }
+  } else if (endlessMode === true){
+    if (alienPosition.length === 0) {
+      clearInterval(alienInterval);
       respawning.forEach((spawn) => alienPosition.push(spawn));
       placeAlien();
-      alienInterval = setInterval(moveAlien, gameScaling);
+      alienInterval = setInterval(moveAlien, 400);
     }
   }
 }
+
 function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
@@ -373,16 +389,9 @@ function laserTravel() {
   }
 }
 function checkForPlayer() {
-  if (updatedLook === 1) {
-    if (cells[laserPosition].classList.contains("player")) {
-      playerGetsShot();
-      endLaser();
-    }
-  } else {
-    if (cells[laserPosition].classList.contains("blockShip")) {
-      playerGetsShot();
-      endLaser();
-    }
+  if (laserPosition === playerPosition){
+    playerGetsShot();
+    endLaser();
   }
 }
 function endLaser() {
@@ -489,11 +498,17 @@ function alternateEnding(){
   }
   alert("Thanks to your bravery Cadet, we managed to evacuate the planet in time!")
   displayScores()
-  resetStats()
-  alienPosition.splice(0, alienPosition.length);
-  respawning.forEach((spawn) => alienPosition.push(spawn));
+  if (endlessMode === true){
+    console.log(endlessMode)
+    startEndlessMode()
+  } else {
+    resetStats()
+    alienPosition.splice(0, alienPosition.length);
+    respawning.forEach((spawn) => alienPosition.push(spawn));
+  }
 }
 function endGame() {
+  endlessMode = false
   if (updatedLook === 1){
     grid.classList.add("gameOverScreen");
   } else {
@@ -519,16 +534,20 @@ function displayScores() {
 }
 function storeScore() {
   const playerName = prompt("Whats your name Space Cadet?");
-  const newScore = { score, playerName };
-  const scores = localStorage.getItem("highscores");
-  console.log(scores);
-  if (scores === null) {
-    console.log("highscores is null");
-    localStorage.setItem("highscores", JSON.stringify([newScore]));
+  if ((playerName.toLowerCase() == "endless" ) && (momLife < 3)){
+    alert("Endless mode?! If you are sure Cadet!")
+    endlessMode = true
+
   } else {
-    const scoresFromStorage = JSON.parse(scores);
-    scoresFromStorage.push(newScore);
-    localStorage.setItem("highscores", JSON.stringify(scoresFromStorage));
+    const newScore = { score, playerName };
+    const scores = localStorage.getItem("highscores");
+    if (scores === null) {
+      localStorage.setItem("highscores", JSON.stringify([newScore]));
+    } else {
+      const scoresFromStorage = JSON.parse(scores);
+      scoresFromStorage.push(newScore);
+      localStorage.setItem("highscores", JSON.stringify(scoresFromStorage));
+    }
   }
 }
 function resetStats() {
@@ -544,4 +563,13 @@ function resetStats() {
   removePlayer(playerPosition);
   removeGuard()
   removeMom()
+}
+
+function startEndlessMode(){
+  removeMom()
+  removeGuard()
+  clearInterval(guardInterval);
+  clearInterval(alienInterval);
+  respawning.forEach((spawn) => alienPosition.push(spawn));
+  createGrid()
 }

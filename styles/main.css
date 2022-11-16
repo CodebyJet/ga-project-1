@@ -23,8 +23,17 @@ body {
   align-items: center;
 }
 .graphicsBtn{
-  box-shadow: 0.25em 0.25em 0.5em red;
+  box-shadow: 0.25em 0.25em 0.5em red,
+  -0.25em -0.25em 0.5em red,
+  -0.25em 0.25em 0.5em red,
+  0.25em -0.25em 0.5em red;
 }
+.graphicsBtn:hover{
+  background-color: orange;
+  border-radius: 5px;
+  border: coral;
+}
+
 .graphicalBody{
   background-image: url(../images/spaceBackground.jpg);
   background-position: center;
