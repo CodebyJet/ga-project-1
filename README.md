@@ -7,10 +7,10 @@ This project was assigned at the end of the third week of General Assembly’s 3
 Deployment link
 https://codebyjet.github.io/ga-project-1/
 
-Technologies Used
+Technologies Used:
 To complete this project I employed JavaScript and jQuery for the functionality, HTML for the basic layout of all elements, and CSS for the styling.
 
-Brief
+Brief:
 With this project, we were given the brief to build a game in one week, working on our own. The game could one of six pre-chosen games. I picked Space Invaders, as it's an old school classic, and I found it to be the most engaging of the choices.
 
 Our game had to:
@@ -19,7 +19,7 @@ The Aliens and player had to shoot each other
 The player was only able to move left to right.
 After the week, we had to give a presentation of our game.
 
-Planning
+Planning:
 The first day of the project, I spent planning it out, with a rough idea of what I wanted the end result to look like, what functions I thought I would need and how I may implement them. I used excalidraw to plan the wireframe of my game
 (insert picture here)
 
@@ -83,9 +83,9 @@ Added two victory screens for when you defeat her.
 
 (attach picture)
 
-I created an endless mode. In the oldschool games I grew up with, some had this secret code, that when inputted unlocked bonus features. I wanted to re-create that feel with an endless mode. When the player is asked for their name after the mothership is dead, if you type in "Endless", it will refresh the players life points and enable an endless mode, where the aliens are quicker than usual.
+I created an endless mode. In the oldschool games I grew up with, some had this secret code, that when inputted unlocked bonus features. I wanted to re-create that feel with an endless mode. When the player is asked for their name after the Mothership is dead, if you type in "Endless", it will refresh the players life points and enable an endless mode, where the aliens are quicker than usual.
 I added bullet collision, so when the two projectiles hit each other, both are removed.
 I added a smoke "poof" effect when the player shoots, that after a set period of time, removes itself.
 
 Future Improvements:
-In future iterations, I would to find a way, other than assiging different classes, to alternate or randomize the colours of the aliens. I wanted to have pink and blue aliens at the same time. I would like to add power ups, so when the player collects certain, randomly timed, objects, that they added something to how the player can interact and play.
+In future iterations, I would to find a way, other than assigning different classes, to alternate or randomize the colors of the aliens. I wanted to have pink and blue aliens at the same time. I would like to add power ups, so when the player collects certain, randomly timed, objects, that they added something to how the player can interact and play.

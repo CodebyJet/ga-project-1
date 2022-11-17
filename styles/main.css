@@ -172,7 +172,13 @@ p span{
   background-image: url(../images/smokePoof.png);
   background-size: contain ;
   background-repeat: no-repeat;
-  opacity: 0.5;
+  opacity: 0.7;
+}
+.explosion{
+    background-image: url(../images/explode.png);
+  background-size: contain ;
+  background-repeat: no-repeat;
+  opacity: 0.7;
 }
 .linkGit{
   background-image: url(../images/astroLogo.jpg);

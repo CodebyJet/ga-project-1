@@ -35,6 +35,7 @@ let alienInterval;
 let laserInterval;
 let guardInterval;
 
+let deadAlien;
 let endlessMode = false
 let lifeCount = 3;
 let score = 0;
@@ -47,7 +48,7 @@ let goingRight = true;
 let movement = 1;
 let missilePosition;
 let laserPosition;
-let travelDistance = 9;
+let travelDistance = 10;
 
 function init() {
   window.addEventListener("keydown", movePlayer);
@@ -73,7 +74,7 @@ function enableGameStats() {
   grid.classList.remove("gameOverScreen");
   grid.classList.remove("pizzaParty");
   grid.classList.remove("VictoryScreen");
-  travelDistance = 9;
+  travelDistance = 10;
   lifeCount = 3;
   momLife = 3;
   lives.textContent = lifeCount;
@@ -162,9 +163,11 @@ function removePlayer(cellNumber) {
 function playerShoot(event) {
   if (event.keyCode === 32) {
     event.preventDefault();
-    if (travelDistance === 9) {
+    if (travelDistance === 10) {
+      travelDistance --
       missilePosition = playerPosition - 10;
       smokePoof(missilePosition);
+      checkIfHit()
       startMissile();
       if (toPlay === false){
         pew.play();
@@ -184,6 +187,12 @@ function smokePoof(missilePosition) {
       cells[missilePosition].classList.remove("greyMist");
     }, 125);
   }
+}
+function explosion(){
+  cells[deadAlien].classList.add("explosion");
+  setTimeout(() => {
+    cells[deadAlien].classList.remove("explosion");
+  }, 150);
 }
 function removeMissile(cellNumber) {
   cells[missilePosition].classList.remove("rocket");
@@ -215,7 +224,7 @@ function missileTravel() {
   }
 }
 function endMissile() {
-  travelDistance = 9;
+  travelDistance = 10;
   clearInterval(missileInterval);
   removeMissile();
 }
@@ -230,7 +239,8 @@ function checkIfHit() {
       for (let i = 0; i < alienPosition.length; i++) {
         if (alienPosition[i] === missilePosition) {
           cells[alienPosition[i]].classList.remove("alien");
-          alienPosition.splice(i, 1);
+          deadAlien = alienPosition.splice(i, 1);
+          explosion();
           checkRespawn();
         }
       }
@@ -507,7 +517,6 @@ function alternateEnding(){
   alert("Thanks to your bravery Cadet, we managed to evacuate the planet in time!")
   displayScores()
   if (endlessMode === true){
-    console.log(endlessMode)
     startEndlessMode()
   } else {
     resetStats()
