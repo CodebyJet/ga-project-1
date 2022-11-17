@@ -1,7 +1,6 @@
 //The start of the journey
 document.addEventListener("DOMContentLoaded", init); //page loads and does the init() function
 
-// function init() {
 const grid = document.querySelector(".grid");
 const gridWrapper = document.querySelector(".grid-wrapper");
 const body = document.querySelector("body");
@@ -28,6 +27,8 @@ let motherPosition = 14
 const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const guardsPosition = [3, 5, 23, 25]
+
+// const sheilds = [83, 86]
 
 let missileInterval;
 let alienInterval;
@@ -247,7 +248,7 @@ function checkIfHit() {
     }
     endMissile();
   }
-  if (cells[missilePosition].classList.contains("blobMom") || (cells[missilePosition].classList.contains("motherShip"))){
+  if (missilePosition === motherPosition){
     if (momLife <= 1){
       score = score + 1000
       endMissile();
@@ -264,6 +265,17 @@ function checkIfHit() {
   }
 
 }
+// function placeShields(){
+//   if (updatedLook === 1) {
+//     for (let i = 0; i < sheilds.length; i++) {
+//       cells[sheilds[i]].classList.add("guard");
+//     }
+//   } else {
+//     for (let i = 0; i < sheilds.length; i++) {
+//       cells[sheilds[i]].classList.add("blockGuard");
+//     }
+//   }
+// }
 function checkRespawn() {
   if (endlessMode === false){
     if (alienPosition.length === 0) {
@@ -384,7 +396,7 @@ function laserTravel() {
   }
 }
 function checkForPlayer() {
-  if (laserPosition === playerPosition){
+  if (laserPosition === playerPosition) {
     playerGetsShot();
     endLaser();
   }
@@ -421,7 +433,6 @@ function playerGetsShot() {
     gridWrapper.classList.remove("shot")
   }, 1000);
 }
-//todo MotherShip
 function placeMotherShip() {
   if (updatedLook === 1) {
     cells[motherPosition].classList.add("motherShip");
