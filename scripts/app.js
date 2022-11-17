@@ -265,6 +265,8 @@ function checkIfHit() {
   }
 
 }
+
+// Maybe in endless mode theres 2 shields?
 // function placeShields(){
 //   if (updatedLook === 1) {
 //     for (let i = 0; i < sheilds.length; i++) {

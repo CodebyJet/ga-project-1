@@ -59,10 +59,14 @@ I tested the game many, many times, I wanted to be sure that the base level of t
 Stage 8: The styling
 I wanted to keep an old school retro feel, but I also wanted to make this joke about the graphics costing more. Just my sense of humour.
 The first thing, was the "MVP" styling, the no-graphics enabled look. This was easily done, I made the player, alien, missile and lasers different coloured blocks. Did some basic layouts of the game
+
 (attach picture)
+
 The stylized actual look out to the game, is enabled through a "graphics?" button. The actual styling I wanted to keep in a lot of blues, pinks and greens, with some key text points in red.
 The health points, in the graphics enabled, was 3 pictures of the old school heart containers, that pulsed as you played the game.
+
 (attach picture)
+
 The title is a h1 with 2 spans inside it of the same title. With a combination of position absolute and text shadows and some basic animations. I was able to create that glitched out and fragmented look.
 I created two game over screens to also go with the look
 
@@ -71,13 +75,17 @@ Now that the game was styled and the basics looked how I wanted them to, I had a
 I added an animation for when you got shot, the screen would shake.
 A leaderboard system that used local storage data to create and display your leader board.
 I added background music, that I had found on a royalty free music site, it and all the sound affects, can be toggled on and off (Laser noises and pew-pew sound affects were added for the alien and player respectfully)
+
 (attach picture)
+
 I added a Mothership style boss, she has 4 guards around her who are invincible, and you have to shoot her 3 times to win. 
 Added two victory screens for when you defeat her.
+
 (attach picture)
+
 I created an endless mode. In the oldschool games I grew up with, some had this secret code, that when inputted unlocked bonus features. I wanted to re-create that feel with an endless mode. When the player is asked for their name after the mothership is dead, if you type in "Endless", it will refresh the players life points and enable an endless mode, where the aliens are quicker than usual.
 I added bullet collision, so when the two projectiles hit each other, both are removed.
 I added a smoke "poof" effect when the player shoots, that after a set period of time, removes itself.
 
-Future Improvements
+Future Improvements:
 In future iterations, I would to find a way, other than assiging different classes, to alternate or randomize the colours of the aliens. I wanted to have pink and blue aliens at the same time. I would like to add power ups, so when the player collects certain, randomly timed, objects, that they added something to how the player can interact and play.
