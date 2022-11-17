@@ -577,6 +577,7 @@ function startEndlessMode(){
   removeGuard()
   clearInterval(guardInterval);
   clearInterval(alienInterval);
+  heartCounter.style.backgroundImage = "";
   respawning.forEach((spawn) => alienPosition.push(spawn));
   createGrid()
 }
