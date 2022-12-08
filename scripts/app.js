@@ -57,6 +57,7 @@ function init() {
   sound.addEventListener("click", backgroundMusic);
   graphics.addEventListener("click", graphicalUpdate);
 }
+
 function createGrid() {
   enableGameStats();
   for (let i = 0; i < gridCellCount; i++) {
@@ -229,10 +230,10 @@ function endMissile() {
   removeMissile();
 }
 function checkIfHit() {
-  if (missilePosition === laserPosition){
-    endMissile();
-    endLaser();
-  }
+  // if (missilePosition === laserPosition){
+  //   endMissile();
+  //   endLaser();
+  // }
   if (updatedLook === 1){
     if (cells[missilePosition].classList.contains("alien")) {
       scoreUp();
