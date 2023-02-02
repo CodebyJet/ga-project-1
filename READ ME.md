@@ -6,9 +6,17 @@ This project was assigned at the end of the third week of General Assembly’s 3
 
 ## Deployment link
 https://codebyjet.github.io/ga-project-1/
+----
+
+## Setup:
+Clone the repo locally, then open in VS code, using:
+‘code .’
+Then: npm start
 
 ## Technologies Used:
 To complete this project I employed JavaScript and jQuery for the functionality, HTML for the basic layout of all elements, and CSS for the styling.
+
+----
 
 ## Brief:
 With this project, we were given the brief to build a game in one week, working on our own. The game could one of six pre-chosen games. I picked Space Invaders, as it's an old school classic, and I found it to be the most engaging of the choices.
