@@ -160,7 +160,7 @@ function removePlayer(cellNumber) {
     cells[cellNumber].classList.remove("player");
   } 
 }
-//ToDo rough beginning shoot - need to put the stopper on spam shoot
+
 function playerShoot(event) {
   if (event.keyCode === 32) {
     event.preventDefault();
