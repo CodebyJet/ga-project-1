@@ -279,7 +279,7 @@ function checkIfHit() {
 // Maybe in endless mode theres 2 shields?
 // function placeShields(){
 //   if (updatedLook === 1) {
-//     for (let i = 0; i < sheilds.length; i++) {
+//     for (let i = 0; i < arr.length; i++) {
 //       cells[sheilds[i]].classList.add("guard");
 //     }
 //   } else {
@@ -335,7 +335,7 @@ function moveAlien() {
   }
   placeAlien();
   alienShoots();
-}
+} // adding comments for push
 function moveDownRight(){
   for (let i = 0; i < alienPosition.length; i++) {
     alienPosition[i] += width + 1;
