@@ -335,7 +335,7 @@ function moveAlien() {
   }
   placeAlien();
   alienShoots();
-} // adding comments for push
+}
 function moveDownRight(){
   for (let i = 0; i < alienPosition.length; i++) {
     alienPosition[i] += width + 1;
