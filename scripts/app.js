@@ -28,7 +28,6 @@ const alienPosition = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const respawning = [3, 4, 5, 6, 13, 14, 15, 16, 23, 24, 25, 26];
 const guardsPosition = [3, 5, 23, 25]
 
-// const sheilds = [83, 86]
 
 let missileInterval;
 let alienInterval;
@@ -230,10 +229,6 @@ function endMissile() {
   removeMissile();
 }
 function checkIfHit() {
-  // if (missilePosition === laserPosition){
-  //   endMissile();
-  //   endLaser();
-  // }
   if (updatedLook === 1){
     if (cells[missilePosition].classList.contains("alien")) {
       scoreUp();
@@ -276,18 +271,6 @@ function checkIfHit() {
   }
 
 }
-// Maybe in endless mode theres 2 shields?
-// function placeShields(){
-//   if (updatedLook === 1) {
-//     for (let i = 0; i < arr.length; i++) {
-//       cells[sheilds[i]].classList.add("guard");
-//     }
-//   } else {
-//     for (let i = 0; i < sheilds.length; i++) {
-//       cells[sheilds[i]].classList.add("blockGuard");
-//     }
-//   }
-// }
 function checkRespawn() {
   if (endlessMode === false){
     if (alienPosition.length === 0) {
@@ -319,7 +302,7 @@ function scoreUp() {
   score += 100;
   scoreDisplay.innerHTML = score;
 }
-//todo re-write moveAlien to something nicer to look at
+//alien movement
 function moveAlien() {
   const leftSide = alienPosition[0] % width === 0;
   removeAlien();
