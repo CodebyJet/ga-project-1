@@ -217,6 +217,9 @@ p span{
   height: 45px;
   cursor: pointer;
 }
+.noDisplay{
+  display: none;
+}
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
