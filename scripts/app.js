@@ -550,6 +550,8 @@ function storeScore() {
     }
   }
 }
+
+//resets the game
 function resetStats() {
   gameScaling = 1000;
   aliensCanShoot = false;
