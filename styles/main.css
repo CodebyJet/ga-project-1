@@ -8,7 +8,7 @@
   background: rgb(247, 73, 200);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1ffffb;
+  background: #1FFFFB;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgb(109, 210, 8);
@@ -20,63 +20,67 @@ body {
   justify-content: center;
   align-items: center;
 }
-.graphicsBtn {
-  box-shadow: 0.25em 0.25em 0.5em red, -0.25em -0.25em 0.5em red,
-    -0.25em 0.25em 0.5em red, 0.25em -0.25em 0.5em red;
+.graphicsBtn{
+  box-shadow: 0.25em 0.25em 0.5em red,
+  -0.25em -0.25em 0.5em red,
+  -0.25em 0.25em 0.5em red,
+  0.25em -0.25em 0.5em red;
 }
-.graphicsBtn:hover {
+.graphicsBtn:hover{
   background-color: orange;
   border-radius: 5px;
   border: coral;
 }
-.graphicalBody {
+.graphicalBody{
   background-image: url(../images/spaceBackground.jpg);
   background-position: center;
 }
-.header {
+.header{
   position: relative;
 }
-.title {
-  font-family: "Press Start 2P", cursive;
+.title{
+  font-family: 'Press Start 2P', cursive;
   color: #8ffdb0;
   text-decoration: underline;
   font-style: italic;
   margin-top: 120px;
   font-size: 4rem;
   text-transform: uppercase;
-  text-shadow: 0.25em 0 0 rgb(11, 200, 214), -0.1em -0.1em 0 #f3e636,
-    0.15em 0.15em 0 #f56def;
+  text-shadow: 
+  0.25em 0 0 rgb(11, 200, 214),
+  -0.1em -0.1em 0 #f3e636,
+  0.15em 0.15em 0 #f56def;
   animation: glitch 500ms infinite;
 }
-.header span {
+.header span{
   position: absolute;
   top: 0;
   left: 0;
 }
-.title span:first-child {
+.title span:first-child{
   animation: glitch 650ms infinite;
   color: #cbffdb;
   z-index: 1;
   clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
   transform: translate(0.15em, -0.025em);
 }
-.title span:last-child {
+.title span:last-child{
   animation: glitch 375ms infinite;
   z-index: 1;
   color: #cbffdb;
   clip-path: polygon(0 60%, 110% 60%, 110% 100%, 0 110%);
   transform: translate(-0.15em, 0.025em);
 }
-.pStyle {
-  font-family: "Press Start 2P", cursive;
+.pStyle{
+  font-family: 'Press Start 2P', cursive;
   color: #a7fcc1;
   max-width: 400px;
   text-shadow: 0px 4px black;
 }
-p span {
+p span{
   color: rgb(222, 38, 38);
 }
-.gameDisplay {
+.gameDisplay{
   display: flex;
 }
 .controls-wrapper {
@@ -107,42 +111,42 @@ p span {
   height: 10%;
   width: 10%;
 }
-.player {
+.player{
   background-image: url(../images/playerShip.png);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
 }
-.laser {
+.laser{
   background-image: url(../images/laserBeam.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.alien {
+.alien{
   background-image: url(../images/pinkAlien.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.invader {
+.invader{
   background-color: red;
 }
-.blockShip {
+.blockShip{
   background-color: green;
 }
-.rocket {
+.rocket{
   background-color: yellow;
 }
-.greyMist {
+.greyMist{
   background-color: gray;
   opacity: 0.5;
   border-radius: 0.15rem;
 }
-.blockLaser {
+.blockLaser{
   background-color: blue;
 }
-.divBackGrd {
+.divBackGrd{
   background-image: url(../images/pixelBckGrd.jpg);
   background-position: center;
   background-size: contain;
@@ -151,25 +155,25 @@ p span {
   border-radius: 12px;
   border-style: inset;
 }
-.missile {
+.missile{
   background-image: url(../images/missile.png);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 }
-.smoke {
+.smoke{ 
   background-image: url(../images/smokePoof.png);
-  background-size: contain;
+  background-size: contain ;
   background-repeat: no-repeat;
   opacity: 0.7;
 }
-.explosion {
+.explosion{
   background-image: url(../images/explode.png);
-  background-size: contain;
+  background-size: contain ;
   background-repeat: no-repeat;
   opacity: 0.7;
 }
-.linkGit {
+.linkGit{
   background-image: url(../images/astroLogo.jpg);
   width: 100px;
   height: 100px;
@@ -177,7 +181,7 @@ p span {
   background-size: contain;
   background-repeat: no-repeat;
 }
-.heartsDisplay {
+.heartsDisplay{
   background-image: url(../images/3heart.png);
   background-size: contain;
   background-position: center;
@@ -186,7 +190,7 @@ p span {
   background-repeat: no-repeat;
   animation: pulse 4s infinite linear;
 }
-.redButton {
+.redButton{
   background: none;
   background-image: url(../images/startBtn.png);
   background-size: contain;
@@ -198,7 +202,7 @@ p span {
   border: none;
   cursor: pointer;
 }
-.soundButton {
+.soundButton{
   border: none;
   background: none;
   background-image: url(../images/Sound.png);
@@ -209,14 +213,14 @@ p span {
   height: 45px;
   cursor: pointer;
 }
-.mobileControls {
+.mobileControls{
   display: flex;
 }
 
-.noDisplay {
+.noDisplay{
   display: none;
 }
-.updatedLeftBtn {
+.updatedLeftBtn{
   background-image: url(../images/lefttButton.png);
   border: none;
   background-color: transparent;
@@ -228,7 +232,7 @@ p span {
   width: 5rem;
   height: 5rem;
 }
-.updatedRightBtn {
+.updatedRightBtn{
   background-image: url(../images/rightButton.png);
   border: none;
   background-color: transparent;
@@ -240,7 +244,7 @@ p span {
   width: 5rem;
   height: 5rem;
 }
-.updatedSpaceBtn {
+.updatedSpaceBtn{
   background-image: url(../images/spaceBtn.jpg);
   border: none;
   background-color: transparent;
@@ -253,63 +257,53 @@ p span {
   height: 5rem;
 }
 
-.gameOverScreen {
+.gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
-.gameOverSad {
+.gameOverSad{
   background-image: url(../images/gameOverSad.jpg);
 }
-.blobMom {
+.blobMom{
   background-color: magenta;
 }
-.blockGuard {
+.blockGuard{
   background-color: teal;
 }
-.motherShip {
+.motherShip{
   background-image: url(../images/mothership.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.guard {
+.guard{
   background-image: url(../images/crystalGuard.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
 }
-.pizzaParty {
+.pizzaParty{
   background-image: url(../images/VictoryPizzaParty.jpg);
 }
-.VictoryScreen {
+.VictoryScreen{
   background-image: url(../images/victoryScreen.jpg);
   background-size: cover;
 }
-.scoreWrap li {
+.scoreWrap li{
   list-style: none;
   display: none;
 }
-.scoreWrap li:nth-child(-n + 5) {
+.scoreWrap li:nth-child(-n+5){
   display: list-item;
 }
-.shot {
+.shot{
   animation: shake 0.35s;
 }
-@keyframes shake {
-  0% {
-    transform: translateX(0);
-  }
-  25% {
-    transform: translateX(5px);
-  }
-  50% {
-    transform: translateX(-5px);
-  }
-  75% {
-    transform: translateX(5px);
-  }
-  100% {
-    transform: translateX(0);
-  }
+@keyframes shake{
+  0% { transform: translateX(0) }
+  25% { transform: translateX(5px) }
+  50% { transform: translateX(-5px) }
+  75% { transform: translateX(5px) }
+  100% { transform: translateX(0) }
 }
 /* @keyframes bounce {
   0% {
@@ -338,144 +332,147 @@ p span {
   }
 } */
 @keyframes shot {
-  0% {
+  0%{
     wi: 5px;
-  }
-  25% {
-    right: 15px;
-  }
-  50% {
+  }25%{
+    right:15px
+  }50%{
     left: 15px;
-  }
-  75% {
-    right: 15px;
+  }75%{
+    right: 15px
   }
 }
 @keyframes pulse {
-  0% {
+  0%{
     width: 150px;
   }
-  24% {
+  24%{
     width: 125px;
   }
-  50% {
-    width: 150px;
+  50%{
+      width: 150px;
   }
-  75% {
+  75%{
     width: 125px;
   }
-  100% {
+  100%{
     width: 150px;
   }
 }
 @keyframes glitch {
   0% {
-    text-shadow: 0.05em 0 0 rgb(11, 200, 214), -0.05em -0.025em 0 #f3e636,
-      -0.025em 0.05em 0 #f56def;
-  }
-  14% {
-    text-shadow: 0.05em 0 0 rgb(11, 200, 214), -0.05em -0.025em 0 #f3e636,
-      -0.025em 0.05em 0 #f56def;
-  }
-  15% {
-    text-shadow: -0.05em -0.025em 0 rgb(11, 200, 214), 0.025em 0.025em 0 #f3e636,
-      -0.05em -0.05em 0 #f56def;
-  }
-  49% {
-    text-shadow: -0.05em -0.025em 0 rgb(11, 200, 214), 0.025em 0.025em 0 #f3e636,
-      -0.05em -0.05em 0 #f56def;
-  }
-  50% {
-    text-shadow: 0.025em 0.05em 0 rgb(11, 200, 214), 0.05em 0 0 #f3e636,
-      0 -0.05em 0 #f56def;
-  }
-  99% {
-    text-shadow: 0.025em 0.05em 0 rgb(11, 200, 214), 0.05em 0 0 #f3e636,
-      0 -0.05em 0 #f56def;
-  }
-  100% {
-    text-shadow: -0.025em 0 0 rgb(11, 200, 214), -0.025em -0.025em 0 #f3e636,
-      -0.025em -0.05em 0 #f56def;
+    text-shadow: 
+  0.05em 0 0 rgb(11, 200, 214),
+  -0.05em -0.025em 0 #f3e636,
+  -0.025em 0.05em 0 #f56def;
+  }  14% {
+    text-shadow: 
+  0.05em 0 0 rgb(11, 200, 214),
+  -0.05em -0.025em 0 #f3e636,
+  -0.025em 0.05em 0 #f56def;
+  } 15% {
+    text-shadow: 
+  -0.05em -0.025em 0 rgb(11, 200, 214),
+  0.025em 0.025em 0 #f3e636,
+  -0.05em -0.05em 0 #f56def;
+  } 49% {
+    text-shadow: 
+  -0.05em -0.025em 0 rgb(11, 200, 214),
+  0.025em 0.025em 0 #f3e636,
+  -0.05em -0.05em 0 #f56def;
+  } 50% {
+    text-shadow: 
+  0.025em 0.05em 0 rgb(11, 200, 214),
+  0.05em 0 0 #f3e636,
+  0 -0.05em 0 #f56def;
+  } 99% {
+    text-shadow: 
+  0.025em 0.05em 0 rgb(11, 200, 214),
+  0.05em 0 0 #f3e636,
+  0 -0.05em 0 #f56def;
+  } 100% {
+    text-shadow: 
+  -0.025em 0 0 rgb(11, 200, 214),
+  -0.025em -0.025em 0 #f3e636,
+  -0.025em -0.05em 0 #f56def;
   }
 }
-@media (prefers-reduced-motion: reduce) {
-  .title {
+@media (prefers-reduced-motion: reduce){
+  .title{
     animation: none;
-  }
-  .heartsDisplay {
+  }.heartsDisplay{
     animation: none;
   }
 }
 @media only screen and (max-height: 800px) {
-  body {
+  body{
     padding-top: 20vh;
   }
 }
-@media only screen and (max-width: 1250px) {
-  .pStyle {
-    font-size: 15px;
-    padding: 0px 20px;
-  }
-  .grid {
-    height: 700px;
-    width: 700px;
+@media only screen and (max-width: 1250px){
+  .pStyle{
+  font-size: 15px;
+  padding: 0px 20px;
+  }.grid{
+  height: 700px;
+  width: 700px;
   }
 }
-@media only screen and (max-width: 1000px) {
-  .grid {
-    height: 600px;
-    width: 600px;
+@media only screen and (max-width: 1000px){
+  .grid{
+  height: 600px;
+  width: 600px;
   }
-  .pStyle {
+  .pStyle{
     font-size: 10px;
   }
 }
-@media only screen and (max-width: 850px) {
-  .gameDisplay {
+@media only screen and (max-width: 850px){
+  .gameDisplay{
     flex-direction: column-reverse;
+  }.grid{
+  height: 500px;
+  width: 500px;
   }
-  .grid {
-    height: 500px;
-    width: 500px;
-  }
-  .graphicalBody {
+  .graphicalBody{
     padding-top: 40px;
     justify-content: space-between;
+
   }
-  .linkGit {
+  .linkGit{
     display: none;
   }
-  .controls-wrapper {
+  .controls-wrapper{
     flex-direction: row;
     align-items: flex-start;
     min-height: 5rem;
     padding: 0px;
   }
-  .pTag {
+  .pTag{
     display: none;
   }
 }
 @media only screen and (max-width: 600px) {
-  .title {
+  .title{
     font-size: 3rem;
   }
 }
-@media only screen and (max-width: 400px) {
-  .title {
+@media only screen and (max-width: 400px)  {
+    .title{
     font-size: 2rem;
   }
 }
-@media only screen and (max-width: 500px) {
-  .grid {
-    height: 300px;
-    width: 300px;
+@media only screen and (max-width: 500px){
+  .grid{
+  height: 300px;
+  width: 300px;
   }
-  .controls-wrapper {
+  .controls-wrapper{
     max-width: 20rem;
   }
 }
 
-@media (min-width: 769px) {
+@media (max-width: 760px){
   .noDisplay {
     display: block;
   }
