@@ -1,39 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Defender!</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./styles/main.css">
-  <script src="./scripts/app.js" charset="utf-8" defer></script>
-  <title>Document</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-<body>
-  <audio class="blaster"></audio>
-  <h1 class="header"><span class="h1span">Defender!</span>Defender!<span class="h1span">Defender!</span></h1>
-  <div class="gameDisplay">
-  <header class="controls-wrapper">
-    <button class="startBtn">Start</button>
-    <button class="soundBtn">Sound</button>
-    <audio class="backgroundSound"></audio>
-    <p class="pScore">Current Score <span id="score-display">0</span></p>
-    <p class="hearts">you have <span class="lives">3</span> lives</p>
-    <p class="pTag">short description, arrow keys move, space shoots.</p>
-    <button class="graphicsBtn">Graphics?</button>
-    <p class="highScore scoreWrap"></p>
-    <a href="https://github.com/CodebyJet"><img class="git"></a>
-  </header>
-  <audio class="pewPew"></audio>
-  <div class="grid-wrapper">
-    <div class="grid"></div>
-  </div>
-  <button class="leftBtn noDisplay" >Left</button>
-  <button class="spaceBtn noDisplay">Shoot</button>
-  <button class="rightBtn noDisplay">Right</button>
-  </div>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Defender!</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <script src="./scripts/app.js" charset="utf-8" defer></script>
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <audio class="blaster"></audio>
+    <h1 class="header">
+      <span class="h1span">Defender!</span>Defender!<span class="h1span"
+        >Defender!</span
+      >
+    </h1>
+    <div class="gameDisplay">
+      <header class="controls-wrapper">
+        <button class="startBtn">Start</button>
+        <button class="soundBtn">Sound</button>
+        <audio class="backgroundSound"></audio>
+        <p class="pScore">Current Score <span id="score-display">0</span></p>
+        <p class="hearts">you have <span class="lives">3</span> lives</p>
+        <p class="pTag">short description, arrow keys move, space shoots.</p>
+        <button class="graphicsBtn">Graphics?</button>
+        <p class="highScore scoreWrap"></p>
+        <a href="https://github.com/CodebyJet"><img class="git" /></a>
+      </header>
+      <audio class="pewPew"></audio>
+      <div class="grid-wrapper">
+        <div class="grid"></div>
+      </div>
+    </div>
+    <div class="mobileControls">
+      <button class="leftBtn noDisplay">Left</button>
+      <button class="spaceBtn noDisplay">Shoot</button>
+      <button class="rightBtn noDisplay">Right</button>
+    </div>
+  </body>
 </html>

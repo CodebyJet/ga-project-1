@@ -14,8 +14,6 @@
   background: rgb(109, 210, 8);
 }
 body {
-  height: 100vh;
-  margin: 0;
   display: flex;
   color: limegreen;
   flex-direction: column;
@@ -93,7 +91,6 @@ p span{
   justify-content: space-evenly;
   margin: 5px;
   padding: 20px;
-  min-height: 50vh;
 }
 .grid-wrapper {
   display: flex;
@@ -104,7 +101,6 @@ p span{
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2);
   display: flex;
   flex-wrap: wrap;
-  height: 100%;
   justify-content: center;
   height: 800px;
   width: 800px;
@@ -172,7 +168,7 @@ p span{
   opacity: 0.7;
 }
 .explosion{
-    background-image: url(../images/explode.png);
+  background-image: url(../images/explode.png);
   background-size: contain ;
   background-repeat: no-repeat;
   opacity: 0.7;
@@ -217,9 +213,50 @@ p span{
   height: 45px;
   cursor: pointer;
 }
-.noDisplay{
-  display: none;
+.mobileControls{
+  display: flex;
 }
+
+.noDisplay{
+  display: ;
+}
+.updatedLeftBtn{
+  background-image: url(../images/lefttButton.png);
+  border: none;
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  color: transparent;
+  width: 5rem;
+  height: 5rem;
+}
+.updatedRightBtn{
+  background-image: url(../images/rightButton.png);
+  border: none;
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  color: transparent;
+  width: 5rem;
+  height: 5rem;
+}
+.updatedSpaceBtn{
+  background-image: url(../images/spaceBtn.jpg);
+  border: none;
+  background-color: transparent;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  color: transparent;
+  width: 5rem;
+  height: 5rem;
+}
+
 .gameOverScreen{
   background-image: url(../images/gameOver.jpg);
 }
@@ -408,6 +445,8 @@ p span{
   .controls-wrapper{
     flex-direction: row;
     align-items: flex-start;
+    min-height: 5rem;
+    padding: 0px;
   }
   .pTag{
     display: none;
@@ -429,6 +468,12 @@ p span{
   width: 300px;
   }
   .controls-wrapper{
-    max-width: 350px;
+    max-width: 20rem;
+  }
+}
+
+@media (min-width: 769px){
+  .noDisplay {
+    display: block;
   }
 }

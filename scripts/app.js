@@ -21,6 +21,9 @@ const highScoreDisplay = document.querySelector(".highScore");
 const cells = [];
 const width = 10;
 const gridCellCount = width * width;
+const leftBtn = document.querySelector('.leftBtn');
+const rightBtn = document.querySelector('.rightBtn');
+const spaceBtn = document.querySelector('.spaceBtn');
 
 let playerPosition = 95;
 let motherPosition = 14
@@ -55,6 +58,9 @@ function init() {
   start.addEventListener("click", createGrid);
   sound.addEventListener("click", backgroundMusic);
   graphics.addEventListener("click", graphicalUpdate);
+  leftBtn.addEventListener('click', movePlayer);
+  rightBtn.addEventListener('click', movePlayer);
+  spaceBtn.addEventListener('click', playerShoot);
 }
 
 function createGrid() {
@@ -114,6 +120,14 @@ function graphicalUpdate(event) {
     pTag.classList.add("pStyle");
     pScore.classList.add("pStyle");
     highScoreDisplay.classList.add("pStyle");
+    // Now with mobile buttons
+    const leftBtn = document.querySelector('.leftBtn');
+    const rightBtn = document.querySelector('.rightBtn');
+    const spaceBtn = document.querySelector('.spaceBtn');
+
+    leftBtn.classList.add('updatedLeftBtn');
+    rightBtn.classList.add('updatedRightBtn');
+    spaceBtn.classList.add('updatedSpaceBtn');
   }
 }
 function placePlayer(playerPosition) {
@@ -136,13 +150,19 @@ function placeAlien() {
 }
 function movePlayer(event) {
   const x = playerPosition % width;
-  const y = Math.floor(playerPosition / width);
-  if (event.key === "ArrowRight" && x < width - 1) {
+  if (
+    (event.type === "keydown" && event.key === "ArrowRight" && x < width - 1) ||
+    (event.type === "click" && event.target.classList.contains("rightBtn") && x < width - 1)
+  ) {
     moveRight();
-  } else if (event.key === "ArrowLeft" && x > 0) {
+  } else if (
+    (event.type === "keydown" && event.key === "ArrowLeft" && x > 0) ||
+    (event.type === "click" && event.target.classList.contains("leftBtn") && x > 0)
+  ) {
     moveLeft();
   }
 }
+
 function moveRight() {
   removePlayer(playerPosition);
   playerPosition++;
@@ -161,7 +181,7 @@ function removePlayer(cellNumber) {
 }
 
 function playerShoot(event) {
-  if (event.keyCode === 32) {
+  if ((event.keyCode === 32) || (event.type === "click" && event.target.classList.contains("spaceBtn"))) {
     event.preventDefault();
     if (travelDistance === 10) {
       travelDistance --
