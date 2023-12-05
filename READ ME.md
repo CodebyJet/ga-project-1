@@ -183,6 +183,8 @@ I added a smoke "poof" effect when the player shoots, that after a set period of
 
 <img src="readme_extras\heart-pulse.gif" >
 
+## Update:
+Added mobile controls too - On screens that are smaller, left, right and shoot buttons appear for the player to click.
 
 ## Wins?
 Overall I was really happy with the styled and unstyled joke and how the finished product looked, the sound board also had a great retro feel.
